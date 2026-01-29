@@ -11,13 +11,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Open Prompt | Open-Source Prompting IDE for Devs",
   description: "Build faster with a free modular prompting tool for developers. Drag and drop to build better prompts for better outputs.",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="cs" className={inter.className}>
       <body>
         <main>{children}</main>
       </body>

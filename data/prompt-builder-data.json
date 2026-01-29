@@ -492,7 +492,7 @@
         },
         {
           "id": "2848748d-72e3-44a4-8241-789d2e341cb4",
-          "name": "Re-Write Professional Email",
+          "name": "Přepiš profesionální e-mail",
           "content": "Imagine you are a college undergrad at a prestigious university. You want to send an email to someone in a professional setting. You are working hard on your professional etiquette and want to make sure that your email is great. Your job is to re-write this email so that it perfectly communicates the idea as succinctly as possible, while carrying a friendly but professional tone.",
           "type": "instruction",
           "linkedComponentId": "cc5179d2-f5e2-4ab1-bb81-d794c695eceb",

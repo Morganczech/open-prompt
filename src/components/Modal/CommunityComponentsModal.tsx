@@ -210,39 +210,39 @@ const CommunityComponentsModal: React.FC = () => {
     <ModalBase
       isOpen={isCommunityModalOpen}
       onClose={() => setCommunityModalOpen(false)}
-      title="Community Components Library"
+      title="Komunitní knihovna komponent"
       className="community-components-modal"
     >
-      {manifestError && <div className="manifest-error">Error loading library: {manifestError}</div>}
-      {!manifestError && libraryFiles.length === 0 && <div>Loading library...</div>}
-      
+      {manifestError && <div className="manifest-error">Chyba při načítání knihovny: {manifestError}</div>}
+      {!manifestError && libraryFiles.length === 0 && <div>Načítání knihovny...</div>}
+
       <div className="library-file-list">
         {libraryFiles.map(file => (
           <div key={file.name} className="library-file-item">
             <div className="file-header">
               <div className="file-header-tree-view">
-                {file.isLoading && !file.content && <span>Loading tree...</span>}
-                {file.error && !file.content && <span>Error loading tree.</span>}
+                {file.isLoading && !file.content && <span>Načítání stromu...</span>}
+                {file.error && !file.content && <span>Chyba při načítání stromu.</span>}
                 {file.content && file.content[0] && (
-                  <SimpleTreeView 
-                    nodes={file.content[0].children || []} 
+                  <SimpleTreeView
+                    nodes={file.content[0].children || []}
                   />
                 )}
-                {!file.isLoading && !file.error && !file.content && <span>Empty or unavailable.</span>}
+                {!file.isLoading && !file.error && !file.content && <span>Prázdné nebo nedostupné.</span>}
               </div>
               <div className="file-actions">
-                <button 
+                <button
                   className={`import-button ${file.importStatus}`}
-                  onClick={(e) => { 
+                  onClick={(e) => {
                     e.stopPropagation(); // Prevent header click when button is clicked
-                    handleImport(file.name); 
+                    handleImport(file.name);
                   }}
                   disabled={file.importStatus === 'importing' || file.importStatus === 'imported'}
                 >
                   {file.importStatus === 'idle' && 'Import'}
-                  {file.importStatus === 'importing' && <><HourglassEmptyIcon fontSize="small"/> Importing...</>}
-                  {file.importStatus === 'imported' && <><CheckCircleIcon fontSize="small"/> Imported</>}
-                  {file.importStatus === 'error' && <><ErrorOutlineIcon fontSize="small"/> Error</>}
+                  {file.importStatus === 'importing' && <><HourglassEmptyIcon fontSize="small" /> Importování...</>}
+                  {file.importStatus === 'imported' && <><CheckCircleIcon fontSize="small" /> Importováno</>}
+                  {file.importStatus === 'error' && <><ErrorOutlineIcon fontSize="small" /> Chyba</>}
                 </button>
               </div>
             </div>

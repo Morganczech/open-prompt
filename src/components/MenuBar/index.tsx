@@ -27,7 +27,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ openSettings, openCommunityLibrary, t
         <MenuIcon fontSize="inherit" />
       </button>
 
-      <button className="menu-button" title="Community Library" onClick={openCommunityLibrary}>
+      <button className="menu-button" title="Komunitní knihovna" onClick={openCommunityLibrary}>
         <AutoStoriesIcon fontSize="inherit" />
       </button>
       <a
@@ -35,7 +35,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ openSettings, openCommunityLibrary, t
         target="_blank"
         rel="noopener noreferrer"
         className="menu-button"
-        title="Documentation"
+        title="Dokumentace"
       >
         <ArticleOutlinedIcon fontSize="inherit" />
       </a>
@@ -44,14 +44,14 @@ const MenuBar: React.FC<MenuBarProps> = ({ openSettings, openCommunityLibrary, t
         target="_blank"
         rel="noopener noreferrer"
         className="menu-button"
-        title="Discord Community"
+        title="Discord komunita"
       >
         <Image src="/discord-icon.svg" alt="Discord Icon" width={24} height={24} style={{ objectFit: 'contain' }} />
       </a>
 
       {/* Profile Button and Menu */}
       <div className="profile-section">
-        <button className="menu-button" title="Settings" onClick={openSettings}>
+        <button className="menu-button" title="Nastavení" onClick={openSettings}>
           <SettingsIcon fontSize="inherit" />
         </button>
       </div>

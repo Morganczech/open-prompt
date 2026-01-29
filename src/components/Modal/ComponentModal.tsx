@@ -45,10 +45,10 @@ const ComponentModal: React.FC = () => {
   // Submit handler
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validation
     if (!componentName.trim()) {
-      setError("Component name is required");
+      setError("Název komponenty je povinný");
       return;
     }
 
@@ -76,14 +76,14 @@ const ComponentModal: React.FC = () => {
     <ModalBase
       isOpen={isComponentModalOpen}
       onClose={() => setComponentModalOpen(false)}
-      title={componentBeingEdited ? "Edit Component" : "Add Component"}
+      title={componentBeingEdited ? "Upravit komponentu" : "Přidat komponentu"}
       className="component-modal"
     >
       <form onSubmit={handleSubmit}>
         {error && <div className="error-message">{error}</div>}
-        
+
         <div className="form-group">
-          <label htmlFor="componentName">Name:</label>
+          <label htmlFor="componentName">Název:</label>
           <input
             id="componentName"
             type="text"
@@ -94,22 +94,22 @@ const ComponentModal: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="componentType">Type:</label>
-          <select 
-            id="componentType" 
-            value={componentType} 
+          <label htmlFor="componentType">Typ:</label>
+          <select
+            id="componentType"
+            value={componentType}
             onChange={(e) => setComponentType(e.target.value as any)}
           >
-            <option value="instruction">Instruction</option>
+            <option value="instruction">Instrukce</option>
             <option value="role">Role</option>
-            <option value="context">Context</option>
-            <option value="format">Format</option>
-            <option value="style">Style</option>
+            <option value="context">Kontext</option>
+            <option value="format">Formát</option>
+            <option value="style">Styl</option>
           </select>
         </div>
 
         <div className="form-group">
-          <label htmlFor="componentContent">Content:</label>
+          <label htmlFor="componentContent">Obsah:</label>
           <textarea
             id="componentContent"
             value={componentContent}
@@ -119,9 +119,9 @@ const ComponentModal: React.FC = () => {
         </div>
 
         <div className="form-actions">
-          <button type="button" onClick={() => setComponentModalOpen(false)}>Cancel</button>
+          <button type="button" onClick={() => setComponentModalOpen(false)}>Zrušit</button>
           <button type="submit" className="primary">
-            {componentBeingEdited ? "Confirm" : "Create"}
+            {componentBeingEdited ? "Potvrdit" : "Vytvořit"}
           </button>
         </div>
       </form>

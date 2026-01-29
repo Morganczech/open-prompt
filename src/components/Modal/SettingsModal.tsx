@@ -11,7 +11,7 @@ import { useAppContext } from "../../contexts/AppContext";
 import Switch from "@mui/material/Switch";
 
 const SettingsModal: React.FC = () => {
-  const { 
+  const {
     settings,
     updateSettings,
     isSettingsModalOpen,
@@ -53,15 +53,15 @@ const SettingsModal: React.FC = () => {
     <ModalBase
       isOpen={isSettingsModalOpen}
       onClose={() => setSettingsModalOpen(false)}
-      title="Settings"
+      title="Nastavení"
       className="settings-modal"
     >
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <h4>Markdown Component Prompting System</h4>
-          <p>Systematic method for structuring sectioned prompts for increased understanding. See a more in depth explanation <a href="https://github.com/falktravis/Prompt-Builder/discussions/1">here</a>.</p>
+          <h4>Markdown systém pro komponenty</h4>
+          <p>Systematická metoda pro strukturování promptů pro lepší pochopení. Více informací <a href="https://github.com/falktravis/Prompt-Builder/discussions/1">zde</a>.</p>
           <label className="settings-toggle">
-            <span>Markdown Component Prompting System</span>
+            <span>Markdown systém pro komponenty</span>
             <Switch
               checked={formData.markdownPromptingEnabled}
               onChange={(e) => setFormData({ ...formData, markdownPromptingEnabled: e.target.checked })}
@@ -72,8 +72,8 @@ const SettingsModal: React.FC = () => {
 
         <div className="form-group">
           <div className="system-prompt-header">
-            <label htmlFor="systemPrompt">System Prompt:</label>
-            <button className="reset-default-btn" type="button" onClick={handleResetSystemPrompt}>Reset to Default</button>
+            <label htmlFor="systemPrompt">Systémový prompt:</label>
+            <button className="reset-default-btn" type="button" onClick={handleResetSystemPrompt}>Obnovit výchozí</button>
           </div>
           <textarea
             id="systemPrompt"
@@ -81,13 +81,13 @@ const SettingsModal: React.FC = () => {
             value={formData.systemPrompt}
             onChange={(e) => setFormData({ ...formData, systemPrompt: e.target.value })}
             rows={5}
-            placeholder="Optional system prompt to include..."
+            placeholder="Volitelný systémový prompt..."
           />
         </div>
 
         <div className="form-actions">
-          <button type="button" onClick={() => setSettingsModalOpen(false)}>Cancel</button>
-          <button type="submit" className="primary">Save Changes</button>
+          <button type="button" onClick={() => setSettingsModalOpen(false)}>Zrušit</button>
+          <button type="submit" className="primary">Uložit změny</button>
         </div>
       </form>
     </ModalBase>

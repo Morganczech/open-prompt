@@ -20,11 +20,11 @@ interface SectionHeaderProps {
   nameInputRefCallback?: (el: HTMLInputElement | null) => void; // Added for focusing
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({ 
-  section, 
-  promptId, 
-  onToggle, 
-  onDelete, 
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+  section,
+  promptId,
+  onToggle,
+  onDelete,
   nameInputRefCallback, // Added for focusing
 }) => {
   const { updateSection } = usePromptContext();
@@ -50,20 +50,20 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
       setEditType(section.editingHeaderTempType !== undefined ? section.editingHeaderTempType : section.type);
       // Reset the editingHeader flag in the context once editing is initiated
       // Also clear temp names/types
-      updateSection(promptId, section.id, { 
+      updateSection(promptId, section.id, {
         editingHeader: false,
         editingHeaderTempName: undefined,
         editingHeaderTempType: undefined
       });
     }
   }, [section.editingHeader, section.id, promptId, section.name, section.type, updateSection, section.editingHeaderTempName, section.editingHeaderTempType]);
-  
+
   // Effect for dynamic input width adjustment
   useEffect(() => {
     if (isEditing && nameInputRef.current) {
       nameInputRef.current.style.minWidth = '100px'; // Or from SCSS
       nameInputRef.current.style.width = 'auto'; // Reset width to allow shrinkage
-      
+
       // Ensure styles are applied and measurements can be taken
       requestAnimationFrame(() => {
         if (nameInputRef.current) {
@@ -104,7 +104,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
     setEditName(section.name);
     setEditType(section.type);
   };
-  
+
   // Save header edit
   const saveEdit = () => {
     // Only update if there are actual changes to name or type
@@ -115,7 +115,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
           type: editType
         });
       } else if (section.name !== "") { // If original name was not empty, allow saving empty name
-         updateSection(promptId, section.id, {
+        updateSection(promptId, section.id, {
           name: "", // Save as empty
           type: editType
         });
@@ -123,7 +123,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
     }
     setIsEditing(false);
   };
-  
+
   // Handle key press in edit mode
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -152,9 +152,9 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   };
 
   return (
-    <div 
+    <div
       className="section-header"
-      onClick={onToggle} 
+      onClick={onToggle}
     >
       <div className="section-info" ref={headerInfoRef}>
         <div className="section-toggle">
@@ -173,26 +173,32 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
             •
             <select
               value={editType}
-              onChange={(e) => {setEditType(e.target.value as any)}}
+              onChange={(e) => { setEditType(e.target.value as any) }}
               onClick={(e) => e.stopPropagation()}
             >
-              <option value="instruction">Instruction</option>
+              <option value="instruction">Instrukce</option>
               <option value="role">Role</option>
-              <option value="context">Context</option>
-              <option value="format">Format</option>
-              <option value="style">Style</option>
+              <option value="context">Kontext</option>
+              <option value="format">Formát</option>
+              <option value="style">Styl</option>
             </select>
           </div>
         ) : (
-            <div onClick={(e) => {if(section.open){startEdit(e)}}} className={`section-display ${getTypeClass()}`}>
-            {section.name} • {section.type.charAt(0).toUpperCase() + section.type.slice(1)}
-            </div>
+          <div onClick={(e) => { if (section.open) { startEdit(e) } }} className={`section-display ${getTypeClass()}`}>
+            {section.name} • {{
+              instruction: "Instrukce",
+              role: "Role",
+              context: "Kontext",
+              format: "Formát",
+              style: "Styl"
+            }[section.type] || section.type}
+          </div>
         )}
       </div>
 
       {!isEditing && (
         <div className="section-actions" onClick={(e) => e.stopPropagation()}>
-          <button className="action-btn delete-btn" onClick={onDelete} title="Delete Section">
+          <button className="action-btn delete-btn" onClick={onDelete} title="Smazat sekci">
             <CloseIcon fontSize="small" />
           </button>
         </div>

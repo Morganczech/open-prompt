@@ -57,17 +57,17 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
   const isExpanded = isFolder && (node as FolderType).expanded; // Changed
   const isSelected = selectedNode && selectedNode.id === node.id;
   const [isHovering, setIsHovering] = useState(false);
-  
+
   // Toggle folder expansion
   const toggleExpand = () => {
     if (!isFolder) return;
     handleToggleFolderExpand(node.id); // Changed
   };
-  
+
   // Handle node selection
   const handleNodeClick = () => {
     setSelectedNode(node);
-    
+
     if (node.type === "folder") {
       toggleExpand();
     }
@@ -75,7 +75,7 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
       openEditComponentModal(node);
     }
   };
-  
+
   // Handle drag start
   const handleDragStart = (e: React.DragEvent) => {
     if (isComponent) { // Only components from sidebar are draggable for prompt building
@@ -109,21 +109,21 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
       document.body.removeChild(existingPreview);
     }
   };
-  
+
   // Handle drag over
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     if (!isFolder) return;
-    
+
     e.dataTransfer.dropEffect = "move";
     setIsHovering(true);
   };
-  
+
   // Handle drag leave
   const handleDragLeave = () => {
     setIsHovering(false);
   };
-  
+
   // Handle drop
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -139,7 +139,7 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
         draggedNodeId = draggedData; // Fallback if not JSON
       }
 
-      if (!draggedNodeId || draggedNodeId === node.id) return; 
+      if (!draggedNodeId || draggedNodeId === node.id) return;
 
       // Dispatch custom event with string IDs
       if (window.dispatchEvent) {
@@ -150,15 +150,15 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
       }
     }
   };
-  
+
   // Delete confirmation
   const confirmDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
-    
+
     const message = isFolder
-      ? `Are you sure you want to delete this folder and all its contents? This action cannot be undone.`
-      : `Are you sure you want to delete this component? This action cannot be undone.`;
-    
+      ? `Opravdu chcete smazat tuto složku a veškerý její obsah? Tuto akci nelze vrátit zpět.`
+      : `Opravdu chcete smazat tuto komponentu? Tuto akci nelze vrátit zpět.`;
+
     if (window.confirm(message)) {
       handleDeleteNode(node.id);
     }
@@ -167,9 +167,8 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
   return (
     <div>
       <div
-        className={`tree-node ${isSelected ? "selected" : ""} ${
-          isHovering ? "hover" : ""
-        }`}
+        className={`tree-node ${isSelected ? "selected" : ""} ${isHovering ? "hover" : ""
+          }`}
         style={{ paddingLeft: `${level * INDENT}px` }}
         onClick={handleNodeClick}
         onDragStart={isComponent ? handleDragStart : undefined} // Attach drag start only to components
@@ -190,7 +189,7 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
             </div>
           )}
           <span className="node-name">{node.name}</span>
-          
+
           {/* Folder actions */}
           {isFolder && (
             <div className="node-actions">
@@ -200,9 +199,9 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
                   e.stopPropagation();
                   startAddFolder(node.id);
                 }}
-                title="Add Folder"
+                title="Přidat složku"
               >
-                <CreateNewFolderIcon sx={{fontSize: 16}} />
+                <CreateNewFolderIcon sx={{ fontSize: 16 }} />
               </button>
               <button
                 className="action-btn add-component-btn"
@@ -210,29 +209,29 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
                   e.stopPropagation();
                   openAddComponentModal(node.id);
                 }}
-                title="Add Component"
+                title="Přidat komponentu"
               >
-                <NoteAddIcon sx={{fontSize: 16}} />
+                <NoteAddIcon sx={{ fontSize: 16 }} />
               </button>
               <button
                 className="action-btn delete-btn"
                 onClick={confirmDelete}
-                title="Delete Folder"
+                title="Smazat složku"
               >
-                <DeleteIcon sx={{fontSize: 16}} />
+                <DeleteIcon sx={{ fontSize: 16 }} />
               </button>
             </div>
           )}
-          
+
           {/* Component actions */}
           {!isFolder && (
             <div className="node-actions">
               <button
                 className="action-btn delete-btn"
                 onClick={confirmDelete}
-                title="Delete Component"
+                title="Smazat komponentu"
               >
-                <DeleteIcon sx={{fontSize: 16}} />
+                <DeleteIcon sx={{ fontSize: 16 }} />
               </button>
             </div>
           )}
@@ -253,7 +252,7 @@ const TreeNodeComponent: React.FC<TreeNodeProps> = ({
             onChange={(e) => setNewFolderName(e.target.value)}
             onKeyDown={handleKeyDown}
             onBlur={submitNewFolder}
-            placeholder="Folder name..."
+            placeholder="Název složky..."
           />
         </div>
       )}

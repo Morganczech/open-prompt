@@ -39,13 +39,13 @@ export default function LoginPage() {
         }}>
             <div style={{ textAlign: "center", marginBottom: "2rem" }}>
                 <h1>Prompt Builder</h1>
-                <p>Private Access Only</p>
+                <p>Pouze soukromý přístup</p>
             </div>
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem", width: "300px" }}>
                 <div style={{ position: "relative" }}>
                     <input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Enter Password"
+                        placeholder="Zadejte heslo"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         style={{
@@ -82,7 +82,7 @@ export default function LoginPage() {
                         {showPassword ? "👁️" : "🙈"}
                     </button>
                 </div>
-                {error && <p style={{ color: "#ff6b6b", margin: 0 }}>{error}</p>}
+                {error && <p style={{ color: "#ff6b6b", margin: 0 }}>Nesprávné heslo</p>}
                 <button
                     type="submit"
                     style={{
@@ -96,7 +96,7 @@ export default function LoginPage() {
                         fontWeight: "bold"
                     }}
                 >
-                    Enter
+                    Vstoupit
                 </button>
             </form>
         </div>

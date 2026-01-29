@@ -16,17 +16,17 @@ interface ActionBarProps {
   markdownEnabled: boolean;
 }
 
-const ActionBar: React.FC<ActionBarProps> = ({ 
-  activePromptId, 
+const ActionBar: React.FC<ActionBarProps> = ({
+  activePromptId,
   systemPrompt,
-  markdownEnabled 
+  markdownEnabled
 }) => {
   const { getCompiledPromptText, addNewSectionForEditing } = usePromptContext();
 
   // Copy prompt to clipboard
   const copyPrompt = () => {
     if (!activePromptId) return;
-    
+
     let promptText = getCompiledPromptText(activePromptId); // activePromptId is now string
 
     if (markdownEnabled && systemPrompt) {
@@ -50,19 +50,19 @@ const ActionBar: React.FC<ActionBarProps> = ({
         <button
           className="copy-btn"
           onClick={copyPrompt}
-          title="Copy Prompt"
+          title="Kopírovat Prompt"
         >
           <ContentCopyIcon />
-          <span>Copy Prompt</span>
+          <span>Kopírovat Prompt</span>
         </button>
 
         <button
           className="new-section-btn"
           onClick={handleAddNewSection}
-          title="Add New Section"
+          title="Přidat novou sekci"
         >
           <AddIcon />
-          <span>New Section</span>
+          <span>Nová sekce</span>
         </button>
       </div>
     </div>

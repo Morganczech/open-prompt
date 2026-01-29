@@ -128,7 +128,7 @@ const Section: React.FC<SectionProps> = ({ section, promptId, nameInputRefCallba
         draggable={true}
         onDragStart={handleSectionDragStart}
         onDragEnd={handleSectionDragEnd}
-        title="Drag to reorder section"
+        title="Přetáhněte pro změnu pořadí"
       ></div>
 
       <SectionHeader
@@ -151,18 +151,18 @@ const Section: React.FC<SectionProps> = ({ section, promptId, nameInputRefCallba
             className="section-input"
             value={section.content}
             onChange={handleContentChange}
-            placeholder="Section content..."
+            placeholder="Obsah sekce..."
           />
 
           {section.linkedComponentId && (
             <div className="linked-component-indicator">
-              <span>Linked to component</span>
+              <span>Propojeno s komponentou</span>
               {section.dirty && (
                 <button
                   className="save-to-library-btn"
                   onClick={() => saveSectionToComponentLibrary(promptId, section.id)}
                 >
-                  Save to Library
+                  Uložit do knihovny
                 </button>
               )}
             </div>

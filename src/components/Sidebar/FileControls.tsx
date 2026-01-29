@@ -31,12 +31,12 @@ const FileControls: React.FC = () => {
         // New Bundle format
         componentsToMerge = data.components;
         if ('prompts' in data && Array.isArray(data.prompts)) {
-          if (confirm(`Found ${data.prompts.length} prompts in file. Overwrite current prompts?`)) {
+          if (confirm(`Nalezeno ${data.prompts.length} promptů. Přepsat aktuální prompty?`)) {
             setPrompts(data.prompts);
           }
         }
       } else {
-        throw new Error("Invalid file format.");
+        throw new Error("Neplatný formát souboru.");
       }
 
       setTreeData((currentTreeData: FolderType[]) => {
@@ -44,10 +44,10 @@ const FileControls: React.FC = () => {
       });
 
       if (fileInputRef.current) fileInputRef.current.value = "";
-      alert("Import successful found.");
+      alert("Import úspěšný.");
     } catch (error) {
       console.error("Error loading file:", error);
-      alert(`Error loading file: ${(error as Error).message}`);
+      alert(`Chyba při načítání souboru: ${(error as Error).message}`);
     }
   };
 
@@ -73,12 +73,12 @@ const FileControls: React.FC = () => {
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error saving file:", error);
-      alert(`Error saving file: ${(error as Error).message}`);
+      alert(`Chyba při ukládání souboru: ${(error as Error).message}`);
     }
   };
 
   const handleSyncToCloud = async () => {
-    if (!confirm("This will overwrite the data on GitHub with your current local state. Continue?")) return;
+    if (!confirm("Tímto přepíšete data na GitHubu aktuálním lokálním stavem. Pokračovat?")) return;
     setIsSyncing(true);
     try {
       const response = await fetch('/api/sync', {
@@ -91,25 +91,25 @@ const FileControls: React.FC = () => {
         }),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Sync failed");
-      alert("Successfully saved to GitHub!");
+      if (!response.ok) throw new Error(result.error || "Synchronizace selhala");
+      alert("Úspěšně uloženo na GitHub!");
     } catch (error: any) {
-      alert(`Sync failed: ${error.message}`);
+      alert(`Synchronizace selhala: ${error.message}`);
     } finally {
       setIsSyncing(false);
     }
   };
 
   const handleLoadFromCloud = async () => {
-    if (!confirm("This will replace your current Prompts and merge Components with data from GitHub. Continue?")) return;
+    if (!confirm("Tímto nahradíte aktuální Prompty a sloučíte komponenty s daty z GitHubu. Pokračovat?")) return;
     setIsSyncing(true);
     try {
       const response = await fetch('/api/sync');
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Load failed");
+      if (!response.ok) throw new Error(data.error || "Načtení selhalo");
 
       if (!data || (!data.components && !data.prompts)) {
-        alert("No data found on GitHub yet.");
+        alert("Na GitHubu nebyla nalezena žádná data.");
         return;
       }
 
@@ -121,9 +121,9 @@ const FileControls: React.FC = () => {
       if (data.prompts) {
         setPrompts(data.prompts);
       }
-      alert("Successfully loaded from GitHub!");
+      alert("Úspěšně načteno z GitHubu!");
     } catch (error: any) {
-      alert(`Load failed: ${error.message}`);
+      alert(`Načtení selhalo: ${error.message}`);
     } finally {
       setIsSyncing(false);
     }
@@ -136,19 +136,19 @@ const FileControls: React.FC = () => {
           className="file-btn save-btn"
           onClick={handleSyncToCloud}
           disabled={isSyncing}
-          title="Sync to GitHub"
+          title="Sync na GitHub"
           style={{ backgroundColor: '#2ea44f', color: 'white', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          {isSyncing ? "..." : <><CloudUploadIcon fontSize="small" style={{ marginRight: 4 }} /> Sync Save</>}
+          {isSyncing ? "..." : <><CloudUploadIcon fontSize="small" style={{ marginRight: 4 }} /> Sync Uložit</>}
         </button>
         <button
           className="file-btn load-btn"
           onClick={handleLoadFromCloud}
           disabled={isSyncing}
-          title="Load from GitHub"
+          title="Načíst z GitHubu"
           style={{ backgroundColor: '#0366d6', color: 'white', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          {isSyncing ? "..." : <><CloudDownloadIcon fontSize="small" style={{ marginRight: 4 }} /> Sync Load</>}
+          {isSyncing ? "..." : <><CloudDownloadIcon fontSize="small" style={{ marginRight: 4 }} /> Sync Načíst</>}
         </button>
       </div>
 
@@ -163,14 +163,14 @@ const FileControls: React.FC = () => {
         <button
           className="file-btn load-btn"
           onClick={() => fileInputRef.current?.click()}
-          title="Import Backup"
+          title="Importovat zálohu"
         >
           Import
         </button>
         <button
           className="file-btn save-btn"
           onClick={handleSave}
-          title="Export Backup"
+          title="Exportovat zálohu"
         >
           Export
         </button>

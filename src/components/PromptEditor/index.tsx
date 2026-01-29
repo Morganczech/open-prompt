@@ -16,22 +16,22 @@ import { ComponentType as ComponentNodeType, Section as SectionType } from "../.
 import { v4 as uuidv4 } from 'uuid'; // Import uuidv4 at the top of the file
 
 const PromptEditor: React.FC = () => {
-  const { 
-    prompts, 
-    activePromptId, 
+  const {
+    prompts,
+    activePromptId,
     setActivePromptId,
-    addPrompt, 
+    addPrompt,
     addSectionAtIndex,
     moveSectionToIndex, // Added from context
     newlyAddedSectionIdForFocus,
     clearNewlyAddedSectionIdForFocus,
     updatePromptName, // Added from context
   } = usePromptContext();
-  
+
   const { settings } = useAppContext();
   const sectionNameInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
   const mainTitleInputRef = useRef<HTMLInputElement>(null);
-  
+
   // State for main prompt title editing
   const [isEditingActivePromptTitle, setIsEditingActivePromptTitle] = useState(false);
   const [activePromptTitleValue, setActivePromptTitleValue] = useState("");
@@ -43,7 +43,7 @@ const PromptEditor: React.FC = () => {
   // State for drag and drop indicator
   const [dropSectionIndex, setDropSectionIndex] = useState<number | null>(null);
   const sectionsContainerRef = useRef<HTMLDivElement>(null);
-  
+
   // Get active prompt
   const activePrompt = prompts.find(p => p.id === activePromptId);
 
@@ -53,25 +53,25 @@ const PromptEditor: React.FC = () => {
       mainTitleInputRef.current.focus();
     }
   }, [isEditingActivePromptTitle]);
-  
+
   // Start editing prompt name (for tabs)
   const startEditingPromptName = (promptId: string, currentName: string) => { // Ensure promptId is string
     setEditingPromptName(promptId);
     setEditingPromptNameValue(currentName);
   };
-  
+
   // Save edited prompt name (for tabs)
   const savePromptName = (promptId: string) => { // Ensure promptId is string
     if (!editingPromptNameValue.trim()) {
       const currentPrompt = prompts.find(p => p.id === promptId); // p.id is string, promptId is string
       if (currentPrompt) {
-          setEditingPromptNameValue(currentPrompt.name);
+        setEditingPromptNameValue(currentPrompt.name);
       }
-      setEditingPromptName(null); 
+      setEditingPromptName(null);
       return;
     }
     updatePromptName(promptId, editingPromptNameValue.trim()); // promptId is string, updatePromptName expects string
-    setEditingPromptName(null); 
+    setEditingPromptName(null);
   };
 
   // Drag and drop handlers for the sections container
@@ -115,11 +115,11 @@ const PromptEditor: React.FC = () => {
 
         if (droppedItem.dragType === "existingSection") {
           // Handle reordering of an existing section
-          if (typeof droppedItem.sectionId === 'string' && 
-              typeof activePromptId === 'string' &&
-              droppedItem.sectionId && // Ensure not empty string
-              activePromptId &&       // Ensure not empty string
-              typeof droppedItem.originalIndex === 'number') {
+          if (typeof droppedItem.sectionId === 'string' &&
+            typeof activePromptId === 'string' &&
+            droppedItem.sectionId && // Ensure not empty string
+            activePromptId &&       // Ensure not empty string
+            typeof droppedItem.originalIndex === 'number') {
 
             let finalInsertionIndex = insertionIndex;
 
@@ -135,9 +135,9 @@ const PromptEditor: React.FC = () => {
 
             // Ensure the finalInsertionIndex is not less than 0.
             if (finalInsertionIndex < 0) {
-                finalInsertionIndex = 0;
+              finalInsertionIndex = 0;
             }
-            
+
             moveSectionToIndex(activePromptId, droppedItem.sectionId, finalInsertionIndex);
           }
         } else {
@@ -174,13 +174,13 @@ const PromptEditor: React.FC = () => {
       clearNewlyAddedSectionIdForFocus();
     }
   }, [newlyAddedSectionIdForFocus, activePrompt?.sections, clearNewlyAddedSectionIdForFocus]);
-  
+
   if (!activePrompt) {
     return (
       <div id="content">
         <div className="empty-state">
-          <p>No prompts available. Create a new prompt to get started.</p>
-          <button onClick={() => addPrompt()}>Create Prompt</button>
+          <p>Žádné prompty. Začněte vytvořením nového.</p>
+          <button onClick={() => addPrompt()}>Vytvořit Prompt</button>
         </div>
       </div>
     );
@@ -189,12 +189,12 @@ const PromptEditor: React.FC = () => {
   return (
     <div id="content">
       {/* Tabs for prompt navigation */}
-      <PromptTabs 
+      <PromptTabs
         prompts={prompts}
         activePromptId={activePromptId}
         setActivePromptId={setActivePromptId}
         // Props for tab-specific editing
-        editingPromptName={editingPromptName} 
+        editingPromptName={editingPromptName}
         editingPromptNameValue={editingPromptNameValue}
         setEditingPromptNameValue={setEditingPromptNameValue}
         startEditingPromptName={startEditingPromptName}
@@ -251,7 +251,7 @@ const PromptEditor: React.FC = () => {
       )}
 
       {/* Sections */}
-      <div 
+      <div
         className="sections-container"
         ref={sectionsContainerRef}
         onDragOver={handleDragOver}
@@ -282,8 +282,8 @@ const PromptEditor: React.FC = () => {
           />
         )}
         {activePrompt.sections.map((section, index) => (
-          <Section 
-            key={section.id} 
+          <Section
+            key={section.id}
             section={section}
             promptId={activePrompt.id}
             index={index} // Added: pass index to Section component
@@ -296,8 +296,8 @@ const PromptEditor: React.FC = () => {
         ))}
       </div>
 
-    {/* Action bar with copy buttons */}
-    <ActionBar 
+      {/* Action bar with copy buttons */}
+      <ActionBar
         activePromptId={activePromptId}
         systemPrompt={settings.systemPrompt}
         markdownEnabled={settings.markdownPromptingEnabled}
