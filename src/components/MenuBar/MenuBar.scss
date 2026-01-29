@@ -19,6 +19,10 @@
   .menu-button.mobile-toggle {
     display: none; // Hidden on desktop
     margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+      display: flex; // Visible on mobile
+    }
   }
 
   .menu-button {

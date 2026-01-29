@@ -105,8 +105,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, closeSidebar }) => {
   };
 
   return (
-    <div id="side-bar">
+    <div id="side-bar" className={isOpen ? 'open' : ''}>
       <header>
+        <button className="close-sidebar-btn" onClick={closeSidebar}>
+          <CloseIcon fontSize="inherit" />
+        </button>
         <h2>Library</h2>
         <button
           className="library-options"
