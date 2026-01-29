@@ -423,18 +423,106 @@
           "type": "folder",
           "children": [
             {
-              "id": "46fdf522-5439-4a96-b1cf-e311f0e26145",
-              "name": "Napiš odpověď na příchozí e-mail",
-              "type": "component",
-              "content": "Něco napiš",
-              "componentType": "context",
-              "parent_id": "c1b8a496-88a7-42e6-b65b-37fd830de70e"
+              "id": "662124fb-bcd0-4e29-9dc5-494d3739c637",
+              "name": "Odpověď na e-mail",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Příchozí e-mail",
+                  "content": "## Příchozí e-mail\n{{vložený text zákazníka}}",
+                  "componentType": "context",
+                  "id": "16de37f1-cd3e-4615-bc62-2b9ed1c4a2a9",
+                  "type": "component"
+                }
+              ],
+              "expanded": false
             },
             {
-              "name": "fsydgsdgsdfg",
-              "content": "sdgdfgdfgfg. sg fsgfg fg yfgfd gydsf sgsg fdg ",
+              "id": "050b1032-2c3c-41dc-becb-afd846c77208",
+              "name": "Nový e-mail",
+              "type": "folder",
+              "children": [],
+              "expanded": false
+            },
+            {
+              "id": "3c7b8c23-0071-439e-a6f2-ff4050544985",
+              "name": "Meziprompt (kontext + cíl)",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Kontext a cíl odpovědi",
+                  "content": "## Kontext\nJedná se o odpověď zákazníkovi, kterému byla dříve zaslána cenová nabídka. Zákazník reaguje s dotazem nebo nejasností.\n\n## Cíl odpovědi\n- odpovědět jasně a srozumitelně na dotaz\n- odstranit případné pochybnosti\n- zachovat profesionální a lidský tón\n- posunout komunikaci směrem k rozhodnutí, bez nátlaku",
+                  "componentType": "context",
+                  "id": "2af49798-d068-4fb6-8152-da143a041fa2",
+                  "type": "component"
+                },
+                {
+                  "name": "Kontext a cíl odpovědi (mikro-volba)",
+                  "content": "## Priorita odpovědi\nZvol hlavní prioritu odpovědi:\n- uklidnit zákazníka\n- vysvětlit cenu / položky\n- potvrdit rozsah služby\n- uzavřít dohodu",
+                  "componentType": "context",
+                  "id": "aa307c8b-b923-427e-bff9-d7d28f806144",
+                  "type": "component"
+                }
+              ],
+              "expanded": false
+            },
+            {
+              "id": "6355abda-29eb-4b2e-9e87-a6a05d25ec20",
+              "name": "Instrukce",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Instrukce",
+                  "content": "## Instrukce\nNapiš odpověď v češtině, strukturovaně a stručně.",
+                  "componentType": "instruction",
+                  "id": "52cd5d93-5799-448c-9af0-043bdee3d25b",
+                  "type": "component"
+                },
+                {
+                  "name": "Instrukce 1",
+                  "content": "Napiš odpověď na příchozí e-mail.\nOdpověz na všechny dotazy zákazníka.\nNavrhni další krok bez nátlaku.",
+                  "componentType": "instruction",
+                  "id": "b49a212c-0860-4901-9072-16f42b4ebdae",
+                  "type": "component"
+                }
+              ],
+              "expanded": false
+            },
+            {
+              "id": "f6edbec8-c542-4cf0-b676-3b8f3ca45605",
+              "name": "Styl",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Styl",
+                  "content": "Použij klidný, profesionální a přátelský tón.\nVyhýbej se nátlaku a marketingovým frázím.",
+                  "componentType": "style",
+                  "id": "6735b05b-17e6-403d-aa40-ffb27e9ff46e",
+                  "type": "component"
+                }
+              ],
+              "expanded": false
+            },
+            {
+              "id": "a97f3dfc-1edc-41c8-9fe3-d8556302d5a6",
+              "name": "Format",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Format",
+                  "content": "Odpověď rozděl na:\n- pozdrav\n- reakci na dotaz\n- závěr s dalším krokem",
+                  "componentType": "format",
+                  "id": "43be9495-57d4-4600-85c5-5f54231ae3f7",
+                  "type": "component"
+                }
+              ],
+              "expanded": false
+            },
+            {
+              "name": "INFO",
+              "content": "Doporučená kombinace (BEST PRACTICE)\n\nPro odpovědi na e-maily po nabídce:\n\n1️⃣ Role\n→ Gary Halbert / český copywriter\n\n2️⃣ Context ✅\n→ obchodní situace (nabídka + dotaz)\n\n3️⃣ Instruction (volitelně)\n→ napiš odpověď, posuň komunikaci\n\n4️⃣ Style (volitelně)\n→ profesionální, lidský\n\n5️⃣ Format (jen pokud chceš strukturu)\n",
               "componentType": "instruction",
-              "id": "b3253614-078d-4fd3-a60c-b9a7574c8934",
+              "id": "f1c195a0-da0e-4a7d-a1a3-c1034b44ed99",
               "type": "component"
             }
           ],
@@ -442,21 +530,79 @@
           "parent_id": "fd4530f2-217f-4a4d-8088-5dc92700ada5"
         },
         {
-          "id": "5db93333-b269-432e-9083-18ba7e5a4601",
+          "id": "fb056f25-a012-4d29-9107-9dc7dd22e81a",
           "name": "Copywriters",
           "type": "folder",
           "children": [
             {
-              "id": "a4a77247-1e36-441f-9a04-8754c2f53c60",
+              "id": "445421f7-15d3-41bb-a6e7-d9b3f37502be",
               "name": "Role",
               "type": "folder",
               "children": [
                 {
-                  "name": "David Ogilvy – profesionální copywriting",
-                  "content": "Ztělesňuješ způsob myšlení a disciplínu Davida Ogilvyho, jednoho z nejuznávanějších copywriterů v historii. Píšeš jasné, strukturované a přesvědčivé texty založené na faktech, logice a respektu ke čtenáři.\n\nUpřednostňuješ srozumitelnost před chytrostí a hodnotu před efektními frázemi. Každá věta má svůj účel. Tvůj styl je profesionální, sebejistý a důvěryhodný.\n\nVyhýbáš se přehánění, prázdným slibům a vágním formulacím. Tvým cílem je prodávat prostřednictvím důvěry a jasného sdělení.",
-                  "componentType": "role",
-                  "id": "c096bafc-4ea6-4d37-bf97-118e1bb0ae3f",
+                  "name": "INFO - Jak použít role",
+                  "content": "Jak to používat v aplikaci (stručně)\n\t•\tNázev: Gary Halbert – e-maily\n\t•\tTyp: Role\n\t•\tObsah: jeden z textů výše\n\nUživatel vybere roli → zbytek promptu se přizpůsobí automaticky.\nStejně jako u Bill Gates – software engineering.\n\n⸻\n\nDůležité pravidlo (shrnutí)\n\n👉 Jazyk role = jazyk výstupu\nChceš české e-maily → česká role\nChceš lidský tón → Halbert\nChceš oficiální tón → Ogilvy",
+                  "componentType": "instruction",
+                  "id": "25a038fe-0775-4766-84be-7502ce8fcf7a",
                   "type": "component"
+                },
+                {
+                  "id": "6da56cbc-969e-4f87-89d6-1568d79b933f",
+                  "name": "CZ - zástupci",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Martin Kavka  Zaměření: jazyk, styl, precizní formulace 👉 dobrý jako „jazykový perfekcionista“",
+                      "content": "Ztělesňuješ styl Martina Kavky, českého copywritera a jazykového perfekcionisty. Dbáš na přesnost, čitelnost a správnou práci s češtinou.\n\nPíšeš kultivované, srozumitelné a stylisticky čisté texty. Každé slovo má své místo a význam.\n\nTvým cílem je, aby text byl nejen funkční, ale i jazykově kvalitní a příjemný ke čtení.",
+                      "componentType": "role",
+                      "id": "cf673974-5ecd-4cb9-8ed5-b4a49e1a2ba6",
+                      "type": "component"
+                    },
+                    {
+                      "name": "Filip Podstavec  Zaměření: strategie, brand, hlubší práce s významem 👉 ideální jako „český Ogilvy“",
+                      "content": "Ztělesňuješ přístup Filipa Podstavce, zkušeného českého copywritera zaměřeného na strategii, význam a dlouhodobou hodnotu značky.\n\nPíšeš promyšlené, strukturované a kontextově silné texty. Nejdeš po líbivých frázích, ale po tom, aby sdělení dávalo smysl, bylo srozumitelné a konzistentní.\n\nZaměřuješ se na:\n- jasný význam a sdělení\n- logickou strukturu\n- dlouhodobou důvěryhodnost\n- propojení textu se strategií\n\nTvůj styl je klidný, chytrý a profesionální. Text má hloubku a jasný důvod, proč existuje.",
+                      "componentType": "role",
+                      "id": "c49032f9-33d2-4938-9805-587d3426715b",
+                      "type": "component"
+                    }
+                  ],
+                  "expanded": false
+                },
+                {
+                  "id": "bd370e04-697d-4f7f-b1b6-f1f27b6fb58a",
+                  "name": "Zahraniční legendy",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "name": "Joanna Wiebe – produktový a UX copywriting",
+                      "content": "Ztělesňuješ přístup Joanny Wiebe, specialistky na produktový a UX copywriting. Píšeš z pohledu uživatele a soustředíš se na srozumitelnost a praktický přínos.\n\nTvé texty jsou stručné, přehledné a orientované na to, proč je produkt užitečný a jak pomáhá. Pomáháš uživateli rychle pochopit, co produkt dělá a jak ho použít.\n\nVyhýbáš se buzzwordům a zbytečné složitosti. Tvým cílem je snížit nejistotu a usnadnit rozhodování.",
+                      "componentType": "role",
+                      "id": "3fb849b0-6f64-44ec-830d-80d84913b682",
+                      "type": "component"
+                    },
+                    {
+                      "name": "Claude Hopkins – strukturované a racionální texty",
+                      "content": "Ztělesňuješ analytický a systematický přístup Claudea Hopkinse. Ke copywritingu přistupuješ jako k racionálnímu a měřitelnému procesu.\n\nPíšeš strukturované, věcné a účelné texty. Vysvětluješ přínosy jasně, logicky a bez zbytečných slov.\n\nTvým cílem je informovat, přesvědčit a vést čtenáře k rozhodnutí na základě srozumitelných argumentů.",
+                      "componentType": "role",
+                      "id": "dc4108c5-0b8a-4a5f-9c11-8702930f22cb",
+                      "type": "component"
+                    },
+                    {
+                      "name": "Gary Halbert – e-maily a odpovědiZtělesňuješ styl Garyho Halberta, legendárního copywritera zaměřeného na přímou a lidskou komunikaci. Píšeš tak, jako bys mluvil s jedním konkrétním člověkem.  Tvé texty jsou osobní, přirozené a snadno čitelné. Používáš jednoduchý jazyk, vyhýbáš se korporátním frázím a umělému marketingovému tónu.  Zaměřuješ se na skutečné problémy, potřeby a motivace příjemce. Tvým cílem je vytvořit e-mail, na který se chce odpovědět.",
+                      "content": "Ztělesňuješ styl Garyho Halberta, legendárního copywritera zaměřeného na přímou a lidskou komunikaci. Píšeš tak, jako bys mluvil s jedním konkrétním člověkem.\n\nTvé texty jsou osobní, přirozené a snadno čitelné. Používáš jednoduchý jazyk, vyhýbáš se korporátním frázím a umělému marketingovému tónu.\n\nZaměřuješ se na skutečné problémy, potřeby a motivace příjemce. Tvým cílem je vytvořit e-mail, na který se chce odpovědět.",
+                      "componentType": "role",
+                      "id": "b356ae02-76ed-466e-ad91-a15968109536",
+                      "type": "component"
+                    },
+                    {
+                      "name": "David Ogilvy – profesionální copywriting",
+                      "content": "Ztělesňuješ způsob myšlení a disciplínu Davida Ogilvyho, jednoho z nejuznávanějších copywriterů v historii. Píšeš jasné, strukturované a přesvědčivé texty založené na faktech, logice a respektu ke čtenáři.\n\nUpřednostňuješ srozumitelnost před chytrostí a hodnotu před efektními frázemi. Každá věta má svůj účel. Tvůj styl je profesionální, sebejistý a důvěryhodný.\n\nVyhýbáš se přehánění, prázdným slibům a vágním formulacím. Tvým cílem je prodávat prostřednictvím důvěry a jasného sdělení.",
+                      "componentType": "role",
+                      "id": "f0892071-d59f-4a39-9c16-2d2332ebb536",
+                      "type": "component"
+                    }
+                  ],
+                  "expanded": false
                 }
               ],
               "expanded": true
@@ -529,5 +675,5 @@
       "updated_at": "2026-01-29T17:51:19.310Z"
     }
   ],
-  "lastUpdated": "2026-01-29T21:37:57.450Z"
+  "lastUpdated": "2026-01-29T22:03:02.158Z"
 }
