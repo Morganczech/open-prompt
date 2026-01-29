@@ -1,3 +1,8 @@
+@use "../../styles/variables/colors" as colors;
+@use "../../styles/variables/mixins" as mixins;
+@use "../../styles/variables/typography" as typography;
+@use "../../styles/global/reset";
+@use "../../styles/global/base";
 /**
  * Sidebar styles
  */
