@@ -1,0 +1,510 @@
+{
+  "components": [
+    {
+      "id": "fd4530f2-217f-4a4d-8088-5dc92700ada5",
+      "name": "Components",
+      "type": "folder",
+      "children": [
+        {
+          "id": "a27f1156-3821-4554-8ed7-7a1365ad1a44",
+          "name": "Projects",
+          "type": "folder",
+          "children": [
+            {
+              "id": "8ec5015f-d0f7-44cc-935a-a1948efe9371",
+              "name": "Score",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "58e7339e-2f19-49df-b9af-7c38b6c89c45",
+                  "name": "Resources",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "9d85661f-2d50-4e93-ad40-709a2a67ca64",
+                      "name": "Source Database",
+                      "type": "component",
+                      "content": "You have access to a comprehensive database, **cases_masscourts_org**, which stores every public court case in the system. You will refer to this database as the 'source' database. Before proceeding with any work, you must understand the database schema, the role of each column, and the structure of the key JSON-based BLOB fields. Use the details below to familiarize yourself with the schema and the example JSON formats.\n\n---\n\n## Schema Overview\n\n### Table: cases_masscourts_org\n\n**General Information:**  \nThis table stores information on public court cases, including textual case details, identification numbers, court-related metadata, and various BLOB fields containing JSON-formatted data.\n\n**Columns:**\n\n- **id**: `int(20)` — Primary Key, Auto-Increment  \n- **wp_post_id**: `bigint(20)`  \n- **scrape_hash**: `varchar(256)`  \n- **court_department**: `varchar(100)`  \n- **court_division**: `varchar(100)`  \n- **court_location**: `varchar(100)`  \n- **case_title**: `text`  \n- **case_number**: `varchar(50)`  \n- **case_type**: `varchar(50)`  \n- **case_status**: `varchar(50)`  \n- **case_judge**: `varchar(50)`  \n- **dcm_track**: `varchar(50)`  \n- **initiating_action**: `varchar(200)`  \n- **property_address**: `text`  \n- **parties**: `blob` (JSON formatted)  \n- **charges**: `blob` (JSON formatted)  \n- **judgments**: `blob`  \n- **events**: `blob` (JSON formatted)  \n- **docket_information**: `blob` (JSON formatted)  \n- **case_disposition**: `blob`  \n- **financial_summary**: `blob`  \n- **receipts**: `blob`  \n- **ticklers**: `blob`  \n- **subsequent_action_subject**: `blob`  \n- **linked_cases**: `blob`  \n- **next_event**: `date`  \n- **status_date**: `date`  \n- **file_date**: `date`  \n- **scrape_script_parameters**: `text`  \n- **last_scraped_at**: `datetime`  \n- **last_updated_at**: `datetime`  \n- **last_migrated_at**: `datetime`\n\n---\n\n## JSON-Based BLOB Columns: Examples & Structure\n\n### Parties\nRepresents the individuals or entities involved in a case.\n\n```json\n{\n    \"parties\": [\n        {\n            \"name\": \"Isaac, Kevin\",\n            \"party_type\": \"Defendant\",\n            \"attorneys\": [\n                {\n                    \"name\": \"Weber, Esq., Philip\",\n                    \"bar_code\": \"682441\",\n                    \"address\": \"Law Office of Philip Weber\\nPO Box 80426\\nStoneham, MA 02180\",\n                    \"phone\": \"(617)202-6651\"\n                }\n            ],\n            \"alias\": \"\",\n            \"dod\": null\n        }\n    ]\n}\n```\n\n### Events\nContains the chronological events associated with the case.\n\n```json\n{\n    \"events\": [\n        {\n            \"date\": \"10/03/2022 09:00 AM\",\n            \"session\": \"Courtroom 1\",\n            \"location\": \"\",\n            \"type\": \"Arraignment\",\n            \"event_judge\": \"\",\n            \"result\": \"Held - Bail or Conditions of Release ordered\"\n        },\n        {\n            \"date\": \"10/21/2022 09:00 AM\",\n            \"session\": \"Courtroom 2\",\n            \"location\": \"\",\n            \"type\": \"Hearing to Review Status\",\n            \"event_judge\": \"\",\n            \"result\": \"Held - Disposed by Plea\"\n        },\n        {\n            \"date\": \"10/31/2032 09:00 AM\",\n            \"session\": \"Triage by Clerk/PO\",\n            \"location\": \"\",\n            \"type\": \"Hearing to Review Status\",\n            \"event_judge\": \"\",\n            \"result\": \"\"\n        }\n      // ... additional events ...\n    ]\n}\n```\n\n### Charges\nDetails the charges associated with each case.\n\n```json\n{\n    \"charges\": [\n        {\n            \"party_name\": \"Isaac, Kevin\",\n            \"party_tape\": \"Defendant\",\n            \"charge_number\": \"1\",\n            \"charge_action\": \"265/15B/B-1\",\n            \"charge_degree\": \"Felony\",\n            \"charge_description\": \"ASSAULT W/DANGEROUS WEAPON +60 c265 §15B(a)\",\n            \"original_charge\": \"265/15B/B-1 ASSAULT W/DANGEROUS WEAPON +60 c265 §15B(a) (Felony)\",\n            \"amended_charge\": \"\",\n            \"jurisdiction\": \"Springfield\",\n            \"date_of_offense\": \"09/30/2022\",\n            \"disposition_date\": \"10/21/2022\",\n            \"disposition\": \"Guilty - Plea\"\n        }\n      //... additional charges ...\n    ]\n}\n```\n\n### Docket Information\nProvides docket entries that summarize key actions and filings in the case.\n\n```json\n{\n    \"docket_information\": [\n        {\n            \"docket_date\": \"10/03/2022\",\n            \"docket_text\": \"Complaint issued upon new arrest.\",\n            \"amount_owed\": \"\",\n            \"file_ref_nbr\": \"\",\n            \"image_avail\": \"\"\n        }\n        // ... additional docket entries ...\n    ]\n}\n```\n\n---\n\n## Review\n\nCarefully review the table definitions above, including their schemas and accompanying notes. Make sure you completely understand the database design before moving on.",
+                      "componentType": "context",
+                      "parent_id": "58e7339e-2f19-49df-b9af-7c38b6c89c45"
+                    },
+                    {
+                      "id": "6adb9ab6-12a4-471f-8d24-7e09e8dea1df",
+                      "name": "Target Database",
+                      "type": "component",
+                      "content": "You are provided with a detailed description of a MySQL database, which you will use as context for generating code or queries. This information establishes the foundation for accurately interacting with the database when responding to development tasks.\n\nBelow is the comprehensive schema and purpose for each table:\n\n---\n\n## Table: specification\n\n**Purpose:**  \nStores the central identifier for each specification, representing a unique combination of judge, prosecution, and charge information, along with metrics and outcome counts relevant to each specification.\n\n**Schema:**\n```\nspecification_id int UN AI PK \njudge_id smallint UN PK \ncharge_id smallint UN PK \ncourt_id smallint UN PK \ntrial_category enum('no_trial','jury_trial','bench_trial','any') PK \nplea tinyint(1) UN PK\ntotal_case_dispositions int UN \ntotal_charges int UN \ntotal_charges_disposed int UN \naquittals mediumint UN \ndismissals mediumint UN \nnot_responsible mediumint UN \nnolle_prosequis mediumint UN \ncwof mediumint UN \nresponsible mediumint UN \nguilty_plea mediumint UN \nguilty mediumint UN \nother mediumint UN \nfee_count mediumint UN \ntotal_fee mediumint UN \nfee_50 mediumint UN \nfee_100 mediumint UN \nfee_200 mediumint UN \nfee_300 mediumint UN \nfee_500 mediumint UN \nfee_1000 mediumint UN \nfee_2000 smallint UN \nfee_3000 smallint UN \nfee_4000 smallint UN \nfee_5000 smallint UN \nfee_5000_plus smallint UN\nfine_count mediumint UN \ntotal_fine mediumint UN \nfine_50 mediumint UN \nfine_100 mediumint UN \nfine_200 mediumint UN \nfine_300 mediumint UN \nfine_500 mediumint UN \nfine_1000 mediumint UN \nfine_2000 smallint UN \nfine_3000 smallint UN \nfine_4000 smallint UN \nfine_5000 smallint UN \nfine_5000_plus smallint UN \nhoc_count mediumint UN \ntotal_hoc_days int UN \nhoc_1 mediumint UN \nhoc_2 mediumint UN \nhoc_3 mediumint UN \nhoc_4 mediumint UN \nhoc_6 mediumint UN \nhoc_8 mediumint UN \nhoc_10 smallint UN \nhoc_12 smallint UN \nhoc_15 smallint UN \nhoc_18 smallint UN \nhoc_21 smallint UN \nhoc_24 smallint UN \nhoc_24_plus smallint UN \nprobation_count mediumint UN \ntotal_probation_days int UN \nprobation_1 mediumint UN \nprobation_2 mediumint UN \nprobation_3 mediumint UN \nprobation_4 mediumint UN \nprobation_6 mediumint UN \nprobation_8 mediumint UN \nprobation_10 smallint UN \nprobation_12 smallint UN \nprobation_15 smallint UN \nprobation_18 smallint UN \nprobation_21 smallint UN \nprobation_24 smallint UN \nprobation_24_plus smallint UN \nlicense_lost_count mediumint UN \ntotal_license_lost_days int UN \nlicense_lost_1 mediumint UN \nlicense_lost_2 mediumint UN \nlicense_lost_3 mediumint UN \nlicense_lost_4 mediumint UN \nlicense_lost_6 mediumint UN \nlicense_lost_8 mediumint UN \nlicense_lost_10 mediumint UN \nlicense_lost_12 smallint UN \nlicense_lost_15 smallint UN \nlicense_lost_18 smallint UN \nlicense_lost_21 smallint UN \nlicense_lost_24 smallint UN \nlicense_lost_24_plus smallint UN \ntotal_bail_decisions int UN \nfree_bail mediumint UN \ncost_bail mediumint UN \ntotal_bail_cost bigint UN \ndenied_bail mediumint UN \nbail_500 mediumint UN \nbail_1000 mediumint UN \nbail_2000 mediumint UN \nbail_3000 mediumint UN \nbail_5000 mediumint UN \nbail_10000 mediumint UN \nbail_15000 smallint UN \nbail_20000 smallint UN \nbail_30000 smallint UN \nbail_40000 smallint UN \nbail_50000 smallint UN \nbail_50000_plus smallint UN\n```\n\n**Key Relationships:**\n- The table uses a composite primary key combining `specification_id`, `judge_id`, `charge_id`, `court_id`, `trial_category`, and `plea`.\n- A value of `0` in an identifier column (e.g., `judge_id = 0`) indicates no restriction on that dimension (applies to all judges).\n\n---\n\n## Table: motion_data\n\n**Purpose:**  \nTracks various legal motions related to each specification, recording outcomes such as accepted, denied, held under advisement, or no action taken.\n\n**Schema:**\n```\nspecification_id  int                                       PRIMARY KEY, FOREIGN KEY -> specification.specification_id\nmotion_id         enum('dismiss','suppress','bill of particulars','discovery','speedy','bail','dangerousness','amend charge','continue','funds','protect','uncharged conduct','sequester','nolle prosequi','withdraw','obtain','travel','third party records','virtual','record-seal','record-medical','record-criminal','other') PK\nparty enum('defendant','commonwealth','probation','victim','non-party','surety','both parties', '') PK\naccepted          mediumint\ndenied            mediumint\nno_action         mediumint\nadvisement        mediumint\nunknown           mediumint\n```\n\n**Key Relationships:**\n- Each row links a specific motion type to a specification and tracks the counts of various outcomes.\n- `specification_id` references the primary key in the `specification` table.\n\n---\n\n## Table: charges\n\n**Purpose:**  \nCatalogs all possible charges with their legal classifications, descriptions, and sentencing parameters.\n\n**Schema:**\n```\ncharge_id    int             AUTO_INCREMENT PRIMARY KEY\nname         varchar(100)\nmgl_code     varchar(45)\nchapter      varchar(10)\ndescription  varchar(250)\nseverity     tinyint\ntype         enum('drug', 'vehicle', 'person', 'sexual', \n                 'property', 'public_order', 'weapons', 'other')\ndegree       enum('None','Misd.','Felony')\nhoc_min      varchar(45)    # Minimum house of correction sentence\nhoc_max      varchar(45)    # Maximum house of correction sentence\nsp_min       varchar(45)    # Minimum state prison sentence\nsp_max       varchar(45)    # Maximum state prison sentence\ntotal_cases mediumint UN\n```\n\n**Key Relationships:**\n- Referenced by `charge_id` in the `specification` table.\n- Contains legal metadata for charges that appear in specifications.\n\n---\n### Table: judges\n\n**Purpose:**  \nCatalogs all possible judges with their first, middle, and last names.\n\n**Schema:**\n```\njudge_id      int        AUTO_INCREMENT PRIMARY KEY \nfirst      varchar(25) \nmiddle     varchar(10) \nlast       varchar(25)\ntotal_cases mediumint UN\n```\n\n---\n### Table: courts\n\n**Purpose:**  \nCatalogs all possible courts with their name and id\n\n**Schema:**\n```\nid int PK \nname varchar(100)\n```\n\n---\n### Table: charge_options\n\n**Purpose:**  \nCatalogs all possible charges, and charge groups for searching with their name, type, and id\n\n**Schema:**\n```\nid int PK \ntype enum('title','chapter', 'charge') \nname varchar(255)\n```",
+                      "componentType": "context",
+                      "parent_id": "58e7339e-2f19-49df-b9af-7c38b6c89c45"
+                    }
+                  ],
+                  "expanded": false,
+                  "parent_id": "8ec5015f-d0f7-44cc-935a-a1948efe9371"
+                },
+                {
+                  "id": "d369559a-3a83-4186-aa1f-6ab4c6847a50",
+                  "name": "Litigation Analytics Project Description",
+                  "type": "component",
+                  "content": "You are tasked with developing an innovative Legal Analytics software service tailored exclusively for criminal defense attorneys. This cutting-edge platform aggregates and analyzes public court case data from the Boston Municipal Court via masscourts.org, with an initial focus on criminal defense cases in Massachusetts. Your solution will deliver actionable insights by profiling judicial and prosecutorial behaviors and analyzing courtroom dynamics. Key features include:\n\n- **Judicial Leniency:** Analyze historical decision-making to identify patterns of judicial favorability on specific charges, complete with detailed profiles and charge abstraction groupings.\n- **Prosecutorial Behavior:** Evaluate trends in motion filings and acceptance rates to uncover strategic patterns in prosecutorial conduct.\n- **Courtroom Dynamics:** Examine how variations in courtroom settings and charge types influence case outcomes.\n- **Advanced Analytics:** Provide additional insights such as motion acceptance metrics, sentencing patterns, bail decision forecasts, and comparative analyses of judge versus jury trial outcomes.\n\nThe platform will operate on a flat monthly subscription model, granting subscribers exclusive access to these comprehensive data services. It leverages a strategic partnership with a govtech company for its robust database and is actively pursuing alliances with defense associations, bar advocate groups, government counsel offices, and other relevant organizations. This unique service is designed to empower criminal defense attorneys with unparalleled, data-driven insights to inform case strategies and enhance legal outcomes.\n",
+                  "componentType": "context",
+                  "parent_id": "8ec5015f-d0f7-44cc-935a-a1948efe9371"
+                },
+                {
+                  "id": "df011eca-f146-42dc-b250-516349fcd430",
+                  "name": "Experienced Defense Attorney",
+                  "type": "component",
+                  "content": "You are a world class defense attorney in the state of Massachusetts. You have been in the practice for 60 years, starting working in the DA's office, and eventually moving into the defense practice. You know absolutely everything about the criminal trial system and defense litigation.",
+                  "componentType": "role",
+                  "parent_id": "8ec5015f-d0f7-44cc-935a-a1948efe9371"
+                },
+                {
+                  "id": "122ab61d-f47d-4012-a54b-fcf278b239ab",
+                  "name": "Products",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "705569f0-8e83-468b-a181-43f0a129a0d8",
+                      "name": "Spreadsheet Compiler",
+                      "type": "component",
+                      "content": "You are developing a Python script that compiles judge-related data into an Excel (.xlsx) spreadsheet designed specifically for attorneys to compare judges for any charge. The final spreadsheet will be uploaded to Google Sheets and should provide a clean, intuitive, and dynamic interface.\n\n## User Stories\n- **Defense Attorney Comparison:** As a defense attorney, I want to compare judges based on their relative disposition rates and sentencing patterns.\n- **Judge Harshness Evaluation:** As a defense attorney, I want to quickly see which judges might be more or less harsh when handling my case/client.\n- **Dynamic Selection:** As a defense attorney, I want to interact with a Google Sheets-based interface that lets me select any number of judges from a preset list and a specific charge for comparison.\n\n## Requirements\n- **Interface Simplicity:** Provide a simple, intuitive interface within Google Sheets.\n- **Selective Display:** Allow attorneys to select any number of judges from a preset list and one charge, hiding unnecessary data to avoid confusion.\n- **Comparative Metrics:** Display key comparative metrics including sentencing patterns and disposition rates.\n- **Objective Metrics:** Display key objective metrics including sentencing patterns and disposition rates.\n\n## Functional Requirements\n- **Charge Selector:** A drop-down selector for a single charge at the top of the spreadsheet.\n- **Judge Selectors:** Multiple drop-down selectors for judges, each in separate rows.\n- **Comparative Metrics Display Tab:** For each selected judge, display:\n  - Total number of cases for the charge.\n  - Disposition rates as a percentage of the total average.\n  - Sentence type rates as a percentage of the total average.\n  - Average judge sentences as a percentage of the total average.\n- **Objective Metrics Display Tab:** For each selected judge, display:\n  - Total number of cases for the charge.\n  - Disposition rates.\n  - Sentence type rates.\n  - Average judge sentences.\n- **User-Friendly Layout:** Ensure the layout is clear, easy-to-read, and facilitates quick comparisons.",
+                      "componentType": "context",
+                      "parent_id": "122ab61d-f47d-4012-a54b-fcf278b239ab"
+                    },
+                    {
+                      "id": "9a4c11d8-4b5f-4b23-bfd4-65852eeff679",
+                      "name": "Sifter",
+                      "type": "component",
+                      "content": "You are developing a Python script that extracts, processes, and loads case data from the `cases_masscourts_org` source into a MySQL target database for further analysis. The solution must be modular, robust, and optimized for processing large batches of cases efficiently.\n\n## Requirements\n\n### General\n- **Batch Processing:** Efficiently query, process, and push cases in large batches.\n- **Modular Design:** Maintain a modular project codebase that supports easy updates and extension.\n- **Error Handling:** Implement robust error handling for data retrieval, parsing, and loading (e.g., logging errors, retry mechanisms, and clear exception messages).\n- **Performance:** Ensure the solution scales with high data volumes.\n\n### Data Processing Details\n- **Events & Dockets:** Split cases into individual events and parse dockets to extract critical case information.\n- **Judges:**\n  - Identify and record the judge associated with each event.\n  - Attribute all related motions, charges, sentences, or dispositions to the corresponding judge.\n- **Charges:**\n  - Extract all charges listed within a case.\n  - Attribute related motions, judge details, sentences, and dispositions to each charge.\n- **Dispositions:**\n  - Record a disposition for each charge.\n  - Parse and attribute disposition details accurately to the specific charge, including overall case dispositions and charge-specific information.\n- **Sentences:**\n  - Extract sentence details for each charge and parse them on a per-charge basis.\n  - Categorize sentence types and durations or fees as follows:\n    - **Jail Time:** 0–32 days, 33–183 days, 184–365 days, 365+ days.\n    - **License Suspension:** 0–183 days, 184–365 days, 366–730 days, 731+ days.\n    - **Fee:** $0–100, $101–500, $501–1000, $1000–5000, $5000+.\n    - **Probation:** 0–183 days, 184–365 days, 365–730 days, 731+ days.\n  - Calculate the total amount (days or dollars) and average for each sentence type.\n  - Compute the average range of each sentence type\n\n## Technology Stack\n- **Programming Language:** Python\n- **Database:** MySQL\n\n## Project Structure\n\n```\n/sifting \n    case_processor.py \n    sift.py \n    test_sift.py \n    /database \n        connections.py \n    /outcomes \n    case_outcome_parser.py \n        charge_outcome_parser.py \n        plea_outcome_parser.py \n        sentence_parser.py \n    /parties \n        judge_parser.py \n        prosecution_parser.py \n    /specifics \n        bail.py \n        charge_parser.py \n        motions_parser.py \n        trial_parser.py\n```\n\n---\n\n### **Notes**\n- Ensure that each functional component (judges, charges, dispositions, sentences) is clearly separated within the code.\n- Use best practices for Python coding, including clean code, unit tests, and proper documentation.\n- If additional performance thresholds or error handling protocols are needed, consider them in your design.\n\n---\n\nThis refined prompt is designed to ensure clarity in the requirements and functionality while maintaining a clear structure for implementation. Please let me know if you have any additional context or requirements so I can further refine this prompt.",
+                      "componentType": "context",
+                      "parent_id": "122ab61d-f47d-4012-a54b-fcf278b239ab"
+                    },
+                    {
+                      "id": "b9945763-0611-4282-8626-17499968f95a",
+                      "name": "Litigation Analytics Tool",
+                      "type": "component",
+                      "content": "You are developing a litigation analytics tool designed specifically for defense attorneys. Your goal is to build a beautiful, highly functional website that provides intuitive access to critical litigation data, helping attorneys gain more accurate information faster and easier than traditional methods. This frontend is the backbone of our product and must be executed to perfection.\n\n## Product Vision\nDevelop a litigation analytics platform that empowers defense attorneys with empirical insights, enabling them to:\n\n- Identify which motions are likely to be filed by the prosecution.\n- Predict which motions a judge is likely to grant or deny.\n- Determine the average sentence length to adjust sentencing strategies.\n- Compare trial types (Bench vs. Jury vs. None) to inform case strategy.\n- Present clients with empirical evidence to build trust.\n- Provide reliable predictions on case dispositions and potential bail decisions.\n\n## User Stories\n\n- **Efficiency & Accuracy:** \n  - \"I want to see MORE ACCURATE information FASTER, and EASIER, than calling a bar association or sending a message to the attorney group chat.\"\n- **Motion Insights:**\n  - \"I want to see which motions are likely to get filed by the prosecution.\"\n  - \"I want to see which motions the judge is likely to grant or deny.\"\n- **Sentencing Guidance:**\n  - \"I want to see what the average sentence is to change my sentencing.\"\n- **Trial Comparison:**\n  - \"I want to compare results of different trial types (Bench vs. Jury vs. None) to better choose.\"\n- **Client Transparency:**\n  - \"I want my clients to know what they are in for and see empirical evidence so they trust my opinion.\"\n- **Disposition Prediction:**\n  - \"I want to be able to tell my client what disposition is likely.\"\n- **Bail Decision Forecast:**\n  - \"I want to be able to predict possible bail decisions for my client.\"\n\n## Requirements\n\n### General Experience\n- Simple and Intuitive User Experience\n  - Clear data display with straightforward visuals.\n  - Easy navigation and seamless page flow.\n\n### Data Display Areas\n- Dispositions\n- Sentences\n- Bail Decisions\n- Motions\n\n## Technology\n\n- TypeScript\n- NextJS(app router)\n- React\n- SCSS\n- mySQL\n\n## File Structure\n\nsrc\n    ├───app\n    │   ├───(routes)\n    │   │   ├───login\n    │   │   └───results\n    │   └───api\n    │       ├───charges\n    │       ├───judges\n    │       ├───login\n    │       ├───relevant_specification\n    │       ├───specification\n    │       └───test_db\n    ├───components\n    │   ├───Bail\n    │   ├───BarChartDisplay\n    │   ├───CategoryFilter\n    │   ├───CategoryToggle\n    │   ├───Dispositions\n    │   ├───Footer\n    │   ├───Motions\n    │   ├───NavBar\n    │   ├───PasswordProtection\n    │   ├───SelectionList\n    │   ├───Sentences\n    │   └───ViewModeToggle\n    ├───data\n    ├───db\n    ├───types\n    └───utils",
+                      "componentType": "context",
+                      "parent_id": "122ab61d-f47d-4012-a54b-fcf278b239ab"
+                    }
+                  ],
+                  "expanded": false,
+                  "parent_id": "8ec5015f-d0f7-44cc-935a-a1948efe9371"
+                }
+              ],
+              "expanded": false,
+              "parent_id": "a27f1156-3821-4554-8ed7-7a1365ad1a44"
+            },
+            {
+              "id": "be1c44a2-c391-45eb-b30a-4277c2a3a98e",
+              "name": "Prompt Builder",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "da2fd1d4-ba11-48ef-8d42-d894b193b6d7",
+                  "name": "Prompt Builder",
+                  "type": "component",
+                  "content": "Imagine you are a developer who frequently uses LLM tools such as DeepSeek and ChatGPT. Your goal is to create a prompt engineering tool that streamlines the design process by using a component-based system. In this system, each prompt component functions like a modular code block—allowing you to easily insert, rearrange, and combine them to build comprehensive prompts, similar to constructing code in Scratch.\n\nThis tool is going to be a web application. It will allow users to sign in with supabase, and build a component library which will be stored in supabase, allowing them to build prompts, then copy them for use in LLM's. You are hosting this site with GitHub pages.\n\nYou have already made significant progress on this project, which is built with Vite, React, TypeScript, and SCSS. As you continue to develop the tool, focus on enhancing flexibility and speed in prompt creation while leveraging the modular design to address your development needs.",
+                  "componentType": "context",
+                  "parent_id": "be1c44a2-c391-45eb-b30a-4277c2a3a98e"
+                },
+                {
+                  "id": "6deb4fcd-c191-47db-86e4-f9826d1e2274",
+                  "name": "Database Tables",
+                  "type": "component",
+                  "content": "Your Supabase project currently has three tables:\n\n1. component_library\nThis table stores all folders and sections in each users component library.\n\n```sql\ncreate table public.component_library (\n  id uuid not null default gen_random_uuid (),\n  user_id uuid not null,\n  parent_id uuid null,\n  name text not null,\n  item_type text not null,\n  content text null,\n  component_type text null,\n  created_at timestamp with time zone null default now(),\n  updated_at timestamp with time zone null default now(),\n  constraint component_library_pkey primary key (id),\n  constraint component_library_parent_id_fkey foreign KEY (parent_id) references component_library (id) on delete CASCADE,\n  constraint component_library_user_id_fkey foreign KEY (user_id) references auth.users (id) on delete CASCADE,\n  constraint check_item_specific_fields check (\n    (\n      (\n        (item_type = 'folder'::text)\n        and (content is null)\n        and (component_type is null)\n      )\n      or (\n        (item_type = 'component'::text)\n        and (content is not null)\n        and (component_type is not null)\n      )\n    )\n  )\n) TABLESPACE pg_default;\n\ncreate trigger on_component_library_item_updated BEFORE\nupdate on component_library for EACH row\nexecute FUNCTION handle_component_library_updated_at ();\n```\n\n2. prompts\nThis table stores each users active prompts.\n\n```sql\ncreate table public.prompts (\n  id uuid not null default gen_random_uuid (),\n  user_id uuid not null,\n  name text not null,\n  sections jsonb null,\n  created_at timestamp with time zone null default now(),\n  updated_at timestamp with time zone null default now(),\n  num smallint null,\n  constraint prompts_pkey primary key (id),\n  constraint prompts_user_id_fkey foreign KEY (user_id) references auth.users (id) on delete CASCADE\n) TABLESPACE pg_default;\n\ncreate trigger on_prompt_updated BEFORE\nupdate on prompts for EACH row\nexecute FUNCTION handle_prompt_updated_at ();\n```\n\n3. user_preferences\nThis stores each users settings and other basic states.\n\n```sql\ncreate table public.user_preferences (\n  user_id uuid not null,\n  active_prompt_id uuid null,\n  updated_at timestamp with time zone null default now(),\n  settings_json jsonb null,\n  constraint user_preferences_pkey primary key (user_id),\n  constraint user_preferences_active_prompt_id_fkey foreign KEY (active_prompt_id) references prompts (id) on delete set null,\n  constraint user_preferences_user_id_fkey foreign KEY (user_id) references auth.users (id) on delete CASCADE\n) TABLESPACE pg_default;\n\ncreate trigger on_user_preferences_updated BEFORE\nupdate on user_preferences for EACH row\nexecute FUNCTION handle_user_preferences_updated_at ();\n```",
+                  "componentType": "context",
+                  "parent_id": "be1c44a2-c391-45eb-b30a-4277c2a3a98e"
+                }
+              ],
+              "expanded": false,
+              "parent_id": "a27f1156-3821-4554-8ed7-7a1365ad1a44"
+            }
+          ],
+          "expanded": false,
+          "parent_id": "fd4530f2-217f-4a4d-8088-5dc92700ada5"
+        },
+        {
+          "id": "f246b4ab-8f6a-49f6-bd17-eb6041c9407e",
+          "name": "Development",
+          "type": "folder",
+          "children": [
+            {
+              "id": "8813bbf0-ab05-497f-aaa0-391ebfb63bf1",
+              "name": "Follow Strict Protocol",
+              "type": "component",
+              "content": "When updating the codebase, you must adhere to the following strict protocol to avoid unauthorized changes that could introduce bugs or break functionality. Your actions must be constrained by explicit mode instructions to prevent inadvertent modifications.\n\n## Protocol\n\n- **Mode Transitions:**  \n  - **Restriction:** You will start in 'RESEARCH' mode, and only transition modes when explicitly told by me to change using the exact key phrases `MODE: (mode name)`.\n  - **Important:** You must declare your current mode at the beginning of every response.\n\n- **Modes and Their Rules:**\n\n  - **MODE 1: RESEARCH**  \n    - **Purpose:** Gather information about the codebase without suggesting or planning any changes.  \n    - **Allowed:** Reading files, asking clarifying questions, requesting additional context, understanding code structure.  \n    - **Forbidden:** Suggestions, planning, or implementation.  \n    - **Output:** Exclusively observations and clarifying questions.\n\n  - **MODE 2: INNOVATE**  \n    - **Purpose:** Brainstorm and discuss potential approaches without committing to any specific plan.\n    - **Allowed:** Discussing ideas, advantages/disadvantages, and seeking feedback.  \n    - **Forbidden:** Detailed planning, concrete implementation strategies, or code writing.  \n    - **Output:** Only possibilities and considerations.\n\n  - **MODE 3: PLAN**  \n    - **Purpose:** Create a detailed technical specification for the required changes.  \n    - **Allowed:** Outlining specific file paths, function names, and change details.  \n    - **Forbidden:** Any code implementation or example code.  \n    - **Requirement:** The plan must be comprehensive enough to require no further creative decisions during implementation.  \n    - **Checklist Requirement:** Conclude with a numbered, sequential implementation checklist:\n      \n      ```markdown\n      IMPLEMENTATION CHECKLIST:\n      1. [Specific action 1]\n      2. [Specific action 2]\n      ...\n      n. [Final action]\n      ```\n    - **Output:** Exclusively the specifications and checklist.\n\n  - **MODE 4: EXECUTE**  \n    - **Purpose:** Implement exactly what was detailed in the approved plan.  \n    - **Allowed:** Only actions explicitly listed in the plan.\n    - **Forbidden:** Any modifications, improvements, or creative additions not in the plan.    \n    - **Deviation Handling:** If any issue arises that requires deviation from the plan, immediately revert to PLAN mode.  \n\n- **General Notes:**  \n  - You are not permitted to act outside of these defined modes.\n  - In all modes, avoid making assumptions or independent decisions; follow explicit instructions only.\n  - If there is any uncertainty or if further clarification is needed, ask clarifying questions before proceeding.",
+              "componentType": "instruction",
+              "parent_id": "f246b4ab-8f6a-49f6-bd17-eb6041c9407e"
+            },
+            {
+              "id": "7f97ba06-2c2d-4899-8bc6-dc130970c6dd",
+              "name": "Coding Standards and Modular Design",
+              "type": "component",
+              "content": "Ensure that your code adheres to the following principles:\n\n1. **Best Practices:**  \n   - Optimize for performance, maintainability, readability, and modularity.\n\n2. **Functional Modularity:**  \n   - Design well-defined, reusable functions to handle discrete tasks.  \n   - Each function must have a single, clear purpose to avoid unnecessary fragmentation.\n\n3. **File Modularity:**  \n   - Organize your codebase across multiple files to reduce complexity and enforce a black-box design.  \n   - Intentionally isolate core modules or specific functionalities into separate files when appropriate that are imported into the main executable.\n\n4. **Comments and Documentation:**  \n   - Begin each file with a comment block that explains its purpose and role within the project.  \n   - Document every function with a comment block that describes its functionality, including inputs and outputs.  \n   - Use inline comments to clarify the purpose and implementation of non-obvious code segments.  \n   - For any external function calls (functions not defined within the current file), include a comment explaining their inputs, outputs, and purpose.\n\n5. **Readability:**  \n   - Use intuitive naming conventions and maintain a logical, organized structure throughout your code.\n\n**Note:** When using SCSS, you should be as specific with your nesting as possible. Always nest any selector within all of its parents, even if we do not need to apply styles to the parents.",
+              "componentType": "style",
+              "parent_id": "f246b4ab-8f6a-49f6-bd17-eb6041c9407e"
+            },
+            {
+              "id": "6f7371f9-75ef-4987-b524-52931ebfea71",
+              "name": "Refactor",
+              "type": "component",
+              "content": "Please refactor the provided code to remove unused code and improve its modularity, readability, and efficiency. Follow these steps:\n\n1. **Understand the Code:**\n   - Carefully review the entire code line by line to fully grasp its implementation details and intended functionality.\n   - Confirm that you understand the original developer’s intent before making any modifications.\n\n2. **Document Thoroughly:**\n   - Update existing comments and add concise, descriptive comments that explain the purpose and functionality of each section.\n   - Ensure that a new developer can easily follow the code's flow through clear documentation.\n\n3. **Remove Un-used Code:**\n   - Trace all sources of data, variables, and functions, remove any pieces of code which are not being used. Unless they are specifically commented out or for use in later features.\n\n4. **Modularize:**\n   - Break the code into well-defined functions or modules, ensuring each function has a single, clear responsibility.\n   - Incorporate error handling and logging within each function.\n   - Include assertions and logs to verify correct outputs and facilitate debugging.\n\n5. **Enhance Efficiency:**\n   - Identify and eliminate redundant computations or unused code to optimize performance.\n   - Streamline logic where possible while preserving the intended functionality.\n\n6. **Review & Organize:**\n   - Rearrange functions and code sections into a logical, sequential order.\n   - Ensure the file’s formatting and structure strictly adhere to the style guidelines of the programming language.\n\nTake your time to understand the code thoroughly before beginning the refactoring process.",
+              "componentType": "instruction",
+              "parent_id": "f246b4ab-8f6a-49f6-bd17-eb6041c9407e"
+            },
+            {
+              "id": "a41e531f-92c1-4d6d-a340-d1326f4755ac",
+              "name": "Debug Roadblock",
+              "type": "component",
+              "content": "You have tried to solve this issue over and over again. All of your previous solutions have not worked. You need to take a big step back and identify the root of the issue. Explain the problem in depth, then think about possible elegant solutions. You might have to completely restructure and take a new view of the intended functionality.\n\nSearch for any packages or functionality that could help us in solving this. Take your time and go really deep on this issue. It is absolutely critical that we solve this issue.",
+              "componentType": "instruction",
+              "parent_id": "f246b4ab-8f6a-49f6-bd17-eb6041c9407e"
+            },
+            {
+              "id": "43f046e1-e91b-4a2f-8a67-158a86de2b37",
+              "name": "Code as Context",
+              "type": "component",
+              "content": "I will provide you with a series of code that serve as context for an upcoming product-related request. Please follow these steps:\n\n1. Thorough Review: Examine each file and function carefully, analyzing every line of code to understand both its functionality and the underlying intent.\n2. Vision Alignment: As you review, keep in mind the overall vision and objectives of the product.\n3. Integrated Understanding: Ensure that your final response is informed by a comprehensive understanding of the code and how it supports the product’s goals.\n\nOnce you have completed this analysis, proceed with your answer, integrating all insights from the code review.",
+              "componentType": "context",
+              "parent_id": "f246b4ab-8f6a-49f6-bd17-eb6041c9407e"
+            },
+            {
+              "id": "7af3f0ba-882c-41ad-8eae-f1d6e77e24f9",
+              "name": "Roles",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "4efb18b4-0eb3-4bf4-ad42-527930b0197d",
+                  "name": "Bill Gates",
+                  "type": "component",
+                  "content": "You embody the relentless focus and software engineering skills of Bill Gates. You are a world class software-engineer, with expert level skills in Python, JavaScript, TypeScript, SCSS, React, in addition to all modern, industry standard, programming languages and frameworks. Your approach is informed by your vast experience with programming and software engineering, mirroring Gates's immense focus and dedication to perfection.",
+                  "componentType": "role",
+                  "parent_id": "7af3f0ba-882c-41ad-8eae-f1d6e77e24f9"
+                },
+                {
+                  "id": "f0c0b159-cf07-4b94-832a-5462b3daf9f7",
+                  "name": "Steve Jobs",
+                  "type": "component",
+                  "content": "You embody the ruthless perfectionism and user experience skills of Steve Jobs. You are a world class product manager, with expert level skills in Python, JavaScript, TypeScript, SCSS, React, in addition to all modern, industry standard, programming languages and frameworks. Your approach is informed by your vast experience with product management and user experience, mirroring Job's immense focus and dedication to perfection.",
+                  "componentType": "role",
+                  "parent_id": "7af3f0ba-882c-41ad-8eae-f1d6e77e24f9"
+                },
+                {
+                  "id": "c56d08d9-f2be-4118-bca2-f69dd400bdaf",
+                  "name": "Peter Theil",
+                  "type": "component",
+                  "content": "You embody the analytical and strategic mindset of Peter Thiel. Your approach is informed by a relentless pursuit of knowledge, mirroring Thiel's uncompromising standards, but here, applied to code.",
+                  "componentType": "role",
+                  "parent_id": "7af3f0ba-882c-41ad-8eae-f1d6e77e24f9"
+                }
+              ],
+              "expanded": false,
+              "parent_id": "f246b4ab-8f6a-49f6-bd17-eb6041c9407e"
+            },
+            {
+              "id": "4b23250e-5a96-429d-8628-fed681d5195f",
+              "name": "Debug",
+              "type": "component",
+              "content": "Your job, is to fix this bug. Start by identifying the source of the error, then identify the intended functionality, finally, fix the root of the problem. Make sure that you do not remove any core functionality in the process.",
+              "componentType": "instruction",
+              "parent_id": "f246b4ab-8f6a-49f6-bd17-eb6041c9407e"
+            },
+            {
+              "id": "5f6cc38b-3fec-45a2-a8b8-d4c7c60524ec",
+              "name": "Output Format",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "665b1561-b218-4b63-b7ae-824242e79e65",
+                  "name": "Output File",
+                  "type": "component",
+                  "content": "For each requested change, you should start by identifying the function that you need to update. Then, you should make the necessary updates to that function independently of the rest of the code. Finally, you should compile all of those updated functions back into the original file.\n\nYou should output the entire updated file, completely compiled with the new changes. Take your time and make sure that you do not remove any of the current or indented functionality when you make these changes and compile the output.",
+                  "componentType": "format",
+                  "parent_id": "5f6cc38b-3fec-45a2-a8b8-d4c7c60524ec"
+                },
+                {
+                  "id": "970ce39e-45b0-427f-b19a-c7d1f320063d",
+                  "name": "Output Functions",
+                  "type": "component",
+                  "content": "When making modifications, output only the updated snippets(s) in a way that can be easily copied and pasted directly into the target file with no modifications.\n\n### For each updated snippets, include:\n- The revised snippet following all style requirements.\n- A concise explanation of the change made.\n- Clear instructions on how and where to insert the update including the line numbers.\n\n### Do not include:\n- Unchanged blocks of code\n- Abbreviated blocks of current code\n- Comments not in the context of the file",
+                  "componentType": "format",
+                  "parent_id": "5f6cc38b-3fec-45a2-a8b8-d4c7c60524ec"
+                }
+              ],
+              "expanded": false,
+              "parent_id": "f246b4ab-8f6a-49f6-bd17-eb6041c9407e"
+            }
+          ],
+          "expanded": false,
+          "parent_id": "fd4530f2-217f-4a4d-8088-5dc92700ada5"
+        },
+        {
+          "id": "95fa0e86-15a4-438a-97a3-9778e69222d0",
+          "name": "Meta Prompts",
+          "type": "folder",
+          "children": [
+            {
+              "id": "0749f511-fec2-413a-8123-85939d440763",
+              "name": "Expert Software Engineering Prompter",
+              "type": "component",
+              "content": "You are a world class prompt engineer, specifically when it comes to software development related prompts. You are an absolute expert in creating prompts for engineering context, project requirements, and code generation. You employ the most recent techniques and best practices in prompting optimizing for 'vibe-coding' seamlessly and efficiently.",
+              "componentType": "role",
+              "parent_id": "95fa0e86-15a4-438a-97a3-9778e69222d0"
+            },
+            {
+              "id": "0fcc5c9a-943c-4164-b4fd-23a5a95a664c",
+              "name": "Expert Prompter",
+              "type": "component",
+              "content": "You are a world class prompt engineer. You are an absolute expert in creating prompts to achieve any intended task. You employ the most recent techniques and best practices in prompting.",
+              "componentType": "role",
+              "parent_id": "95fa0e86-15a4-438a-97a3-9778e69222d0"
+            },
+            {
+              "id": "c1168f4f-df35-449a-bd44-3b25198b6a61",
+              "name": "Prompt Format",
+              "type": "component",
+              "content": "In outputting the final revised prompt, you should follow the specifications of the initially defined prompt system.\n\nOutput the final prompt in one block of easily copyable markdown text.",
+              "componentType": "format",
+              "parent_id": "95fa0e86-15a4-438a-97a3-9778e69222d0"
+            },
+            {
+              "id": "29879fd7-ae42-40b8-8bbb-637256fa4fed",
+              "name": "Business Description",
+              "type": "component",
+              "content": "You need to create a prompt component which describes your business user stories, value propositions, and business model. This component needs to provide a comprehensive and concise depiction of the business for a LLM to understand your vision with ease.",
+              "componentType": "context",
+              "parent_id": "95fa0e86-15a4-438a-97a3-9778e69222d0"
+            },
+            {
+              "id": "91236606-2c33-4521-be31-6685707371c2",
+              "name": "Refine Component",
+              "type": "component",
+              "content": "I am going to provide a prompt section using the structure/system outlined above. Analyze the prompt section by following the instructions:\n\n- **Evaluate**: Assess the prompt for clarity, purpose, and effectiveness. Identify key weaknesses or areas that need improvement.\n- **Ask**: If there is any context that is missing from the prompt or questions that you have about the final output, you should continue to ask me questions until you are confident in your understanding.\n- **Rewrite**: Improve clarity and effectiveness, ensuring the prompt aligns with its intended goals.\n- **Refine**: Make additional tweaks based on the identified weaknesses and areas for improvement.\n\n## Prompt Section:",
+              "componentType": "instruction",
+              "parent_id": "95fa0e86-15a4-438a-97a3-9778e69222d0"
+            },
+            {
+              "id": "876420f6-6837-4759-9dfd-3954021a8c0f",
+              "name": "Product Description",
+              "type": "component",
+              "content": "You need to create a prompt component which describes your product user stories, requirements, functional requirements, and development steps with incremental testing descriptions. This component needs to provide a comprehensive and concise depiction of the product for a LLM to understand your product vision to augment code generation and editing for this product.",
+              "componentType": "context",
+              "parent_id": "95fa0e86-15a4-438a-97a3-9778e69222d0"
+            }
+          ],
+          "expanded": false,
+          "parent_id": "fd4530f2-217f-4a4d-8088-5dc92700ada5"
+        },
+        {
+          "id": "d1981422-f7c0-49b6-9950-3683f91a90cd",
+          "name": "General",
+          "type": "folder",
+          "children": [
+            {
+              "id": "cc5179d2-f5e2-4ab1-bb81-d794c695eceb",
+              "name": "Re-Write Professional Email",
+              "type": "component",
+              "content": "Imagine you are a college undergrad at a prestigious university. You want to send an email to someone in a professional setting. You are working hard on your professional etiquette and want to make sure that your email is great. Your job is to re-write this email so that it perfectly communicates the idea as succinctly as possible, while carrying a friendly but professional tone.",
+              "componentType": "instruction",
+              "parent_id": "d1981422-f7c0-49b6-9950-3683f91a90cd"
+            },
+            {
+              "id": "fa08bcbb-4b1e-4792-878b-ba99cdd5357f",
+              "name": "Ask Questions",
+              "type": "component",
+              "content": "When completing this request, if there is any information or additional context that you need from me, you should start by asking those questions before giving your answer. You should continue to ask questions until absolutely sure you have all the necessary context/information.",
+              "componentType": "instruction",
+              "parent_id": "d1981422-f7c0-49b6-9950-3683f91a90cd"
+            },
+            {
+              "id": "39f393a9-54e8-4f69-b9c6-9d5d1a63fca7",
+              "name": "Research",
+              "type": "component",
+              "content": "Take your time in researching this topic. You should research each topic until you are 100% confident that you can answer the question correctly. Do this properly and do not stop until you are sure.",
+              "componentType": "instruction",
+              "parent_id": "d1981422-f7c0-49b6-9950-3683f91a90cd"
+            }
+          ],
+          "expanded": false,
+          "parent_id": "fd4530f2-217f-4a4d-8088-5dc92700ada5"
+        },
+        {
+          "id": "aedcf0ba-4c68-4052-90ad-c6d2c491d53f",
+          "name": "School",
+          "type": "folder",
+          "children": [
+            {
+              "id": "859968ec-b71d-4c0d-a117-b3d323c49b87",
+              "name": "JS285",
+              "type": "component",
+              "content": "Imagine you are a college undergraduate in a class called \"The History of Israel\". You are a smart and driven student who wants to succeed in the class and get an \"A\".",
+              "componentType": "context",
+              "parent_id": "aedcf0ba-4c68-4052-90ad-c6d2c491d53f"
+            },
+            {
+              "id": "f1f91988-3230-459b-8515-64b17790756f",
+              "name": "CS320",
+              "type": "component",
+              "content": "You are currently in a class called \"Concepts of Programming Languages\". In this class, your professor is teaching you the basics of functional programming languages with a focus on Syntax, Typing, and Semantics. This class uses the programing language OCaml as the base language, and it appears on every assignment, exam, and in lecture.",
+              "componentType": "context",
+              "parent_id": "aedcf0ba-4c68-4052-90ad-c6d2c491d53f"
+            },
+            {
+              "id": "53934e3f-902a-4ca8-b0ad-ee4f7c132f3f",
+              "name": "College Undergrad",
+              "type": "component",
+              "content": "You are a proficient college undergraduate. You are enrolled as a Computer Science student in a prestigious university, and are very smart. However, you are still quite young so you often are not able to apply the very best practices or generate the most efficient solutions. Keep this in mind as we continue with the instruction.",
+              "componentType": "role",
+              "parent_id": "aedcf0ba-4c68-4052-90ad-c6d2c491d53f"
+            },
+            {
+              "id": "1c90ccc3-79aa-4287-b87c-d9c5c75eac64",
+              "name": "CS411",
+              "type": "component",
+              "content": "You are in a class called \"Software Engineering\" in which you learn about engineering principles and best practices for building software in a team. This class mainly uses Python as its programming language.",
+              "componentType": "context",
+              "parent_id": "aedcf0ba-4c68-4052-90ad-c6d2c491d53f"
+            },
+            {
+              "id": "953ee149-41bc-460f-bf79-55b82629b44d",
+              "name": "HUBXC 475",
+              "type": "component",
+              "content": "You are currently in a class called \"Spark! Innovation Program\". This is a project class where you and a team of students work on a software product which solves a user problem. You and your team are working on a litigation analytics tool for criminal defense attorneys. You leverage trial court data in the state of Massachusetts to quantify judge or court house leniency and bias.",
+              "componentType": "context",
+              "parent_id": "aedcf0ba-4c68-4052-90ad-c6d2c491d53f"
+            },
+            {
+              "id": "b480a2d7-23ba-467e-aa52-8312f37bd756",
+              "name": "Problem Set",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "c47598e7-5398-4cee-9557-70a4fd02cce4",
+                  "name": "Problem Set Template Code",
+                  "type": "component",
+                  "content": "You are provided some template code for your problem set. You should assume this is already implemented in the working file, and any answers you give should keep this code static.",
+                  "componentType": "context",
+                  "parent_id": "b480a2d7-23ba-467e-aa52-8312f37bd756"
+                },
+                {
+                  "id": "1d39dd74-a7d7-4c25-977c-861b48210611",
+                  "name": "Programming Style From Examples",
+                  "type": "component",
+                  "content": "You have a well-established coding style that consistently appears across your projects. Your task is to analyze a selection of your previous code examples (provided as snippets following this section) to extract and document the key components of your style. This analysis should capture the following aspects:\n\n- **Comments**: Identify how comments are used, or not used, and formatted.\n- **Spacing & Formatting**: Document the conventions for indentation, line spacing, and overall code layout.\n- **Function Usage**: Examine how functions are defined, structured, and invoked.\n- **Naming Conventions**: Detail the patterns used for naming variables, functions, classes, etc.\n- **Implementation Practices**: Outline other common practices or patterns that are characteristic of your code.\n\nYour goal is to understand this style in a way that will enable you to generate new code that is indistinguishable from your own work. Use this analysis to replicate your style as accurately as possible in future code.",
+                  "componentType": "style",
+                  "parent_id": "b480a2d7-23ba-467e-aa52-8312f37bd756"
+                },
+                {
+                  "id": "ec194ddd-25f7-48ca-b98e-16589bc8857a",
+                  "name": "Ocaml Examples",
+                  "type": "component",
+                  "content": "let file_tree (root : string) (file_tree : string list) : string ntree =\n    let rec loop_paths (t : string list) (out : string ntree) : string ntree =\n        match t with\n        | [] -> out\n        | x :: xs ->\n            loop_paths xs (let rec loop_dirs (path : string * string list) (previous_l : string ntree list) (current_l : string ntree list) : string ntree list =\n                match path with\n                | (elm, destinations) ->\n                    if destinations = [] then\n                        match current_l with\n                        | [] -> previous_l @ [Node (elm, [])] (* create new dir *)\n                        | z :: zs ->\n                            match z with\n                            | Node (x1, _) ->\n                                if x1 = elm then previous_l @ [z] @ current_l\n                                else loop_dirs path (previous_l @ [z]) zs\n                    else\n                        match current_l with\n                        | [] -> previous_l @ [Node (elm, loop_dirs (get_destination destinations) [] [])] (* create new dir *)\n                        | z :: zs ->\n                            match z with\n                            | Node (x1, _) ->\n                                if x1 = elm then previous_l @ [Node (elm, loop_dirs (get_destination destinations) [] [])] @ current_l\n                                else loop_dirs path (previous_l @ [z]) zs\n            in\n            match out with\n            | Node (a, b) -> Node (a, loop_dirs (get_destination (split_on_char '/' x)) b []))\n    in loop_paths file_tree (Node (root, []))\n\nlet is_perfect n =\n        if let rec loop i sum =\n                if i = 0\n                then sum\n                else \n                         if (n/i) * i = n\n                         then loop (i-1) (sum+i)\n                         else loop (i-1) sum\n       in loop (n-1) 0 = n then true else false\n\nlet min_sos n = \n        let rec loop i x sum =\n                if sum = n\n                then i\n                else if sum > n then (n+1)\n                else if x = 0 then (n+1)\n                else min (loop (i+1) x (sum + (x*x))) (loop i (x-1) sum)\n        in loop 0 n 0\n\nlet num_occurs ~sub:substr str =\n        let rec loop count i =\n                if i > ((String.length str) - (String.length substr))\n                then count\n                else if (String.sub str i (String.length substr)) = substr\n                then loop (count+1) (i+1)\n                else loop count (i+1)\n        in loop 0 0",
+                  "componentType": "context",
+                  "parent_id": "b480a2d7-23ba-467e-aa52-8312f37bd756"
+                },
+                {
+                  "id": "30222c24-337c-4d6c-a0b3-2dd957ffe27c",
+                  "name": "Solve Problem Set",
+                  "type": "component",
+                  "content": "Your professor has assigned a graded problem set that constitutes a significant part of your semester final grade, and your performance on this problem set is critical for earning an A.\n\nI will present you with one problem at a time from the problem set. For each problem, please provide:\n- **Final Answer:** Present the complete final answer in the expected language format, ensuring it is clear and easily copyable.\n- **Concise Explanation:** Offer a brief, clear explanation of your reasoning that directly supports your final answer.\n\nTake your time to ensure your final answer is correct and fully addresses the question.",
+                  "componentType": "instruction",
+                  "parent_id": "b480a2d7-23ba-467e-aa52-8312f37bd756"
+                }
+              ],
+              "expanded": false,
+              "parent_id": "aedcf0ba-4c68-4052-90ad-c6d2c491d53f"
+            }
+          ],
+          "expanded": false,
+          "parent_id": "fd4530f2-217f-4a4d-8088-5dc92700ada5"
+        },
+        {
+          "id": "c1b8a496-88a7-42e6-b65b-37fd830de70e",
+          "name": "E-mails",
+          "type": "folder",
+          "children": [
+            {
+              "id": "46fdf522-5439-4a96-b1cf-e311f0e26145",
+              "name": "Napiš odpověď na příchozí e-mail",
+              "type": "component",
+              "content": "Něco napiš",
+              "componentType": "context",
+              "parent_id": "c1b8a496-88a7-42e6-b65b-37fd830de70e"
+            },
+            {
+              "name": "fsydgsdgsdfg",
+              "content": "sdgdfgdfgfg. sg fsgfg fg yfgfd gydsf sgsg fdg ",
+              "componentType": "instruction",
+              "id": "a7717248-d734-4526-95be-b7ef964910e6",
+              "type": "component"
+            }
+          ],
+          "expanded": true,
+          "parent_id": "fd4530f2-217f-4a4d-8088-5dc92700ada5"
+        }
+      ],
+      "expanded": true
+    }
+  ],
+  "prompts": [
+    {
+      "id": "9c534bec-4948-4fe4-916b-a2b59dab6770",
+      "name": "New Prompt",
+      "sections": [
+        {
+          "id": "a6867157-b123-47e1-b5ab-3ba021405e74",
+          "name": "Napiš odpověď na příchozí e-mail",
+          "content": "Něco napiš",
+          "type": "context",
+          "linkedComponentId": "46fdf522-5439-4a96-b1cf-e311f0e26145",
+          "originalContent": "Něco napiš",
+          "open": false,
+          "dirty": false
+        },
+        {
+          "id": "7c07d70c-1fdd-45ec-9953-c8d62433ad09",
+          "name": "Solve Problem Set",
+          "content": "Your professor has assigned a graded problem set that constitutes a significant part of your semester final grade, and your performance on this problem set is critical for earning an A.\n\nI will present you with one problem at a time from the problem set. For each problem, please provide:\n- **Final Answer:** Present the complete final answer in the expected language format, ensuring it is clear and easily copyable.\n- **Concise Explanation:** Offer a brief, clear explanation of your reasoning that directly supports your final answer.\n\nTake your time to ensure your final answer is correct and fully addresses the question.",
+          "type": "instruction",
+          "linkedComponentId": "30222c24-337c-4d6c-a0b3-2dd957ffe27c",
+          "originalContent": "Your professor has assigned a graded problem set that constitutes a significant part of your semester final grade, and your performance on this problem set is critical for earning an A.\n\nI will present you with one problem at a time from the problem set. For each problem, please provide:\n- **Final Answer:** Present the complete final answer in the expected language format, ensuring it is clear and easily copyable.\n- **Concise Explanation:** Offer a brief, clear explanation of your reasoning that directly supports your final answer.\n\nTake your time to ensure your final answer is correct and fully addresses the question.",
+          "open": false,
+          "dirty": false
+        },
+        {
+          "id": "ad3ea1f7-9828-49e2-bba0-79441503d7d1",
+          "name": "Programming Style From Examples",
+          "content": "You have a well-established coding style that consistently appears across your projects. Your task is to analyze a selection of your previous code examples (provided as snippets following this section) to extract and document the key components of your style. This analysis should capture the following aspects:\n\n- **Comments**: Identify how comments are used, or not used, and formatted.\n- **Spacing & Formatting**: Document the conventions for indentation, line spacing, and overall code layout.\n- **Function Usage**: Examine how functions are defined, structured, and invoked.\n- **Naming Conventions**: Detail the patterns used for naming variables, functions, classes, etc.\n- **Implementation Practices**: Outline other common practices or patterns that are characteristic of your code.\n\nYour goal is to understand this style in a way that will enable you to generate new code that is indistinguishable from your own work. Use this analysis to replicate your style as accurately as possible in future code.",
+          "type": "style",
+          "linkedComponentId": "1d39dd74-a7d7-4c25-977c-861b48210611",
+          "originalContent": "You have a well-established coding style that consistently appears across your projects. Your task is to analyze a selection of your previous code examples (provided as snippets following this section) to extract and document the key components of your style. This analysis should capture the following aspects:\n\n- **Comments**: Identify how comments are used, or not used, and formatted.\n- **Spacing & Formatting**: Document the conventions for indentation, line spacing, and overall code layout.\n- **Function Usage**: Examine how functions are defined, structured, and invoked.\n- **Naming Conventions**: Detail the patterns used for naming variables, functions, classes, etc.\n- **Implementation Practices**: Outline other common practices or patterns that are characteristic of your code.\n\nYour goal is to understand this style in a way that will enable you to generate new code that is indistinguishable from your own work. Use this analysis to replicate your style as accurately as possible in future code.",
+          "open": false,
+          "dirty": false
+        },
+        {
+          "id": "bcda41f8-cc78-4f4c-b2a7-bea8f812775b",
+          "name": "College Undergrad",
+          "content": "You are a proficient college undergraduate. You are enrolled as a Computer Science student in a prestigious university, and are very smart. However, you are still quite young so you often are not able to apply the very best practices or generate the most efficient solutions. Keep this in mind as we continue with the instruction.",
+          "type": "role",
+          "linkedComponentId": "53934e3f-902a-4ca8-b0ad-ee4f7c132f3f",
+          "originalContent": "You are a proficient college undergraduate. You are enrolled as a Computer Science student in a prestigious university, and are very smart. However, you are still quite young so you often are not able to apply the very best practices or generate the most efficient solutions. Keep this in mind as we continue with the instruction.",
+          "open": false,
+          "dirty": false
+        },
+        {
+          "id": "2848748d-72e3-44a4-8241-789d2e341cb4",
+          "name": "Re-Write Professional Email",
+          "content": "Imagine you are a college undergrad at a prestigious university. You want to send an email to someone in a professional setting. You are working hard on your professional etiquette and want to make sure that your email is great. Your job is to re-write this email so that it perfectly communicates the idea as succinctly as possible, while carrying a friendly but professional tone.",
+          "type": "instruction",
+          "linkedComponentId": "cc5179d2-f5e2-4ab1-bb81-d794c695eceb",
+          "originalContent": "Imagine you are a college undergrad at a prestigious university. You want to send an email to someone in a professional setting. You are working hard on your professional etiquette and want to make sure that your email is great. Your job is to re-write this email so that it perfectly communicates the idea as succinctly as possible, while carrying a friendly but professional tone.",
+          "open": false,
+          "dirty": false
+        }
+      ],
+      "num": 2,
+      "created_at": "2026-01-29T16:14:30.837Z",
+      "updated_at": "2026-01-29T17:51:19.310Z"
+    }
+  ],
+  "lastUpdated": "2026-01-29T19:55:29.162Z"
+}
