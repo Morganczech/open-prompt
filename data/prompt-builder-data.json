@@ -429,7 +429,7 @@
               "children": [
                 {
                   "name": "Příchozí e-mail",
-                  "content": "## Příchozí e-mail\n{{vložený text zákazníka}}",
+                  "content": "## Příchozí e-mail \n\nJaromír Kabát\npo 26. 1. 17:50 (před 3 dny)\nkomu: mně\n\nDobrý den.\nMoc děkuji za rychlou nabídku. \nTermín je velmi blízký, to by se mi na jednu stranu moc líbilo, nevím ale, jestli stihneme tak rychle vybrat vybavení a vyjednat všechny detaily.\nRozhodně bych to chtěl zkusit.\n\nděkuji\nJ.Kabát",
                   "componentType": "context",
                   "id": "16de37f1-cd3e-4615-bc62-2b9ed1c4a2a9",
                   "type": "component"
@@ -495,9 +495,16 @@
               "children": [
                 {
                   "name": "Styl",
-                  "content": "Použij klidný, profesionální a přátelský tón.\nVyhýbej se nátlaku a marketingovým frázím.",
+                  "content": "Použij klidný, profesionální, přátelský a povzbudiví tón.\nVyhýbej se nátlaku a marketingovým frázím.",
                   "componentType": "style",
                   "id": "6735b05b-17e6-403d-aa40-ffb27e9ff46e",
+                  "type": "component"
+                },
+                {
+                  "name": "Klidný + povzbudivý",
+                  "content": "Použij klidný, profesionální a přátelský tón.\nBuď povzbudivý a podporující, pomoz zákazníkovi získat jistotu v rozhodování.\nUjisti ho, že jeho obavy jsou pochopitelné a řešitelné.\nVyhýbej se nátlaku, tlaku na rychlé rozhodnutí a marketingovým frázím.",
+                  "componentType": "style",
+                  "id": "9ed692be-c52c-46a1-98b1-4f27aeae0938",
                   "type": "component"
                 }
               ],
@@ -620,7 +627,7 @@
                   "expanded": true
                 }
               ],
-              "expanded": false
+              "expanded": true
             }
           ],
           "expanded": true
@@ -635,13 +642,13 @@
       "name": "Odpovědi na e-mail",
       "sections": [
         {
-          "id": "26227b7d-2744-4a9c-8246-910e0ae99f81",
-          "name": "Gary Halbert – e-maily a odpovědi",
-          "content": "Ztělesňuješ styl Garyho Halberta, legendárního copywritera zaměřeného na přímou a lidskou komunikaci. Píšeš tak, jako bys mluvil s jedním konkrétním člověkem.\n\nTvé texty jsou osobní, přirozené a snadno čitelné. Používáš jednoduchý jazyk, vyhýbáš se korporátním frázím a umělému marketingovému tónu.\n\nZaměřuješ se na skutečné problémy, potřeby a motivace příjemce. Tvým cílem je vytvořit e-mail, na který se chce odpovědět.",
+          "id": "2699f418-f42a-4d74-b250-bf8a8519539a",
+          "name": "David Ogilvy – profesionální copywriting",
+          "content": "Ztělesňuješ způsob myšlení a disciplínu Davida Ogilvyho, jednoho z nejuznávanějších copywriterů v historii. Píšeš jasné, strukturované a přesvědčivé texty založené na faktech, logice a respektu ke čtenáři.\n\nUpřednostňuješ srozumitelnost před chytrostí a hodnotu před efektními frázemi. Každá věta má svůj účel. Tvůj styl je profesionální, sebejistý a důvěryhodný.\n\nVyhýbáš se přehánění, prázdným slibům a vágním formulacím. Tvým cílem je prodávat prostřednictvím důvěry a jasného sdělení.",
           "type": "role",
-          "linkedComponentId": "b356ae02-76ed-466e-ad91-a15968109536",
-          "originalContent": "Ztělesňuješ styl Garyho Halberta, legendárního copywritera zaměřeného na přímou a lidskou komunikaci. Píšeš tak, jako bys mluvil s jedním konkrétním člověkem.\n\nTvé texty jsou osobní, přirozené a snadno čitelné. Používáš jednoduchý jazyk, vyhýbáš se korporátním frázím a umělému marketingovému tónu.\n\nZaměřuješ se na skutečné problémy, potřeby a motivace příjemce. Tvým cílem je vytvořit e-mail, na který se chce odpovědět.",
-          "open": true,
+          "linkedComponentId": "f0892071-d59f-4a39-9c16-2d2332ebb536",
+          "originalContent": "Ztělesňuješ způsob myšlení a disciplínu Davida Ogilvyho, jednoho z nejuznávanějších copywriterů v historii. Píšeš jasné, strukturované a přesvědčivé texty založené na faktech, logice a respektu ke čtenáři.\n\nUpřednostňuješ srozumitelnost před chytrostí a hodnotu před efektními frázemi. Každá věta má svůj účel. Tvůj styl je profesionální, sebejistý a důvěryhodný.\n\nVyhýbáš se přehánění, prázdným slibům a vágním formulacím. Tvým cílem je prodávat prostřednictvím důvěry a jasného sdělení.",
+          "open": false,
           "dirty": false
         },
         {
@@ -651,7 +658,7 @@
           "type": "context",
           "linkedComponentId": "336b8540-3ded-4bb8-83c4-52217fe5ba60",
           "originalContent": "## Zákazník reaguje na tento e-mail s termíny a přílohou (cenová nabídka)\n{{vložený text zákazníka}}",
-          "open": true,
+          "open": false,
           "dirty": true
         },
         {
@@ -660,18 +667,18 @@
           "content": "## Příchozí e-mail \n\nJaromír Kabát\npo 26. 1. 17:50 (před 3 dny)\nkomu: mně\n\nDobrý den.\nMoc děkuji za rychlou nabídku. \nTermín je velmi blízký, to by se mi na jednu stranu moc líbilo, nevím ale, jestli stihneme tak rychle vybrat vybavení a vyjednat všechny detaily.\nRozhodně bych to chtěl zkusit.\n\nděkuji\nJ.Kabát",
           "type": "context",
           "linkedComponentId": "16de37f1-cd3e-4615-bc62-2b9ed1c4a2a9",
-          "originalContent": "## Příchozí e-mail\n{{vložený text zákazníka}}",
-          "open": true,
+          "originalContent": "## Příchozí e-mail \n\nJaromír Kabát\npo 26. 1. 17:50 (před 3 dny)\nkomu: mně\n\nDobrý den.\nMoc děkuji za rychlou nabídku. \nTermín je velmi blízký, to by se mi na jednu stranu moc líbilo, nevím ale, jestli stihneme tak rychle vybrat vybavení a vyjednat všechny detaily.\nRozhodně bych to chtěl zkusit.\n\nděkuji\nJ.Kabát",
+          "open": false,
           "dirty": true
         },
         {
-          "id": "8757ab7b-3b7b-4037-9787-3023ba82ed0f",
-          "name": "Styl",
-          "content": "Použij klidný, profesionální a přátelský tón.\nVyhýbej se nátlaku a marketingovým frázím.",
+          "id": "e7987182-3643-4c9d-bd8c-d78b92083236",
+          "name": "Klidný + povzbudivý",
+          "content": "Použij klidný, profesionální a přátelský tón.\nBuď povzbudivý a podporující, pomoz zákazníkovi získat jistotu v rozhodování.\nUjisti ho, že jeho obavy jsou pochopitelné a řešitelné.\nVyhýbej se nátlaku, tlaku na rychlé rozhodnutí a marketingovým frázím.",
           "type": "style",
-          "linkedComponentId": "6735b05b-17e6-403d-aa40-ffb27e9ff46e",
-          "originalContent": "Použij klidný, profesionální a přátelský tón.\nVyhýbej se nátlaku a marketingovým frázím.",
-          "open": true,
+          "linkedComponentId": "9ed692be-c52c-46a1-98b1-4f27aeae0938",
+          "originalContent": "Použij klidný, profesionální a přátelský tón.\nBuď povzbudivý a podporující, pomoz zákazníkovi získat jistotu v rozhodování.\nUjisti ho, že jeho obavy jsou pochopitelné a řešitelné.\nVyhýbej se nátlaku, tlaku na rychlé rozhodnutí a marketingovým frázím.",
+          "open": false,
           "dirty": false
         },
         {
@@ -681,7 +688,7 @@
           "type": "format",
           "linkedComponentId": "43be9495-57d4-4600-85c5-5f54231ae3f7",
           "originalContent": "Odpověď rozděl na:\n- pozdrav\n- reakci na dotaz\n- závěr s dalším krokem",
-          "open": true,
+          "open": false,
           "dirty": false
         }
       ],
@@ -690,5 +697,5 @@
       "updated_at": "2026-01-29T17:51:19.310Z"
     }
   ],
-  "lastUpdated": "2026-01-29T22:29:43.300Z"
+  "lastUpdated": "2026-01-29T22:48:52.679Z"
 }
