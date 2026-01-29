@@ -434,12 +434,35 @@
               "name": "fsydgsdgsdfg",
               "content": "sdgdfgdfgfg. sg fsgfg fg yfgfd gydsf sgsg fdg ",
               "componentType": "instruction",
-              "id": "a7717248-d734-4526-95be-b7ef964910e6",
+              "id": "b3253614-078d-4fd3-a60c-b9a7574c8934",
               "type": "component"
             }
           ],
           "expanded": true,
           "parent_id": "fd4530f2-217f-4a4d-8088-5dc92700ada5"
+        },
+        {
+          "id": "5db93333-b269-432e-9083-18ba7e5a4601",
+          "name": "Copywriters",
+          "type": "folder",
+          "children": [
+            {
+              "id": "a4a77247-1e36-441f-9a04-8754c2f53c60",
+              "name": "Role",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "David Ogilvy – profesionální copywriting",
+                  "content": "Ztělesňuješ způsob myšlení a disciplínu Davida Ogilvyho, jednoho z nejuznávanějších copywriterů v historii. Píšeš jasné, strukturované a přesvědčivé texty založené na faktech, logice a respektu ke čtenáři.\n\nUpřednostňuješ srozumitelnost před chytrostí a hodnotu před efektními frázemi. Každá věta má svůj účel. Tvůj styl je profesionální, sebejistý a důvěryhodný.\n\nVyhýbáš se přehánění, prázdným slibům a vágním formulacím. Tvým cílem je prodávat prostřednictvím důvěry a jasného sdělení.",
+                  "componentType": "role",
+                  "id": "c096bafc-4ea6-4d37-bf97-118e1bb0ae3f",
+                  "type": "component"
+                }
+              ],
+              "expanded": true
+            }
+          ],
+          "expanded": true
         }
       ],
       "expanded": true
@@ -492,13 +515,13 @@
         },
         {
           "id": "2848748d-72e3-44a4-8241-789d2e341cb4",
-          "name": "Přepiš profesionální e-mail",
+          "name": "Re-Write Professional Email",
           "content": "Imagine you are a college undergrad at a prestigious university. You want to send an email to someone in a professional setting. You are working hard on your professional etiquette and want to make sure that your email is great. Your job is to re-write this email so that it perfectly communicates the idea as succinctly as possible, while carrying a friendly but professional tone.",
           "type": "instruction",
           "linkedComponentId": "cc5179d2-f5e2-4ab1-bb81-d794c695eceb",
           "originalContent": "Imagine you are a college undergrad at a prestigious university. You want to send an email to someone in a professional setting. You are working hard on your professional etiquette and want to make sure that your email is great. Your job is to re-write this email so that it perfectly communicates the idea as succinctly as possible, while carrying a friendly but professional tone.",
           "open": false,
-          "dirty": false
+          "dirty": true
         }
       ],
       "num": 2,
@@ -506,5 +529,5 @@
       "updated_at": "2026-01-29T17:51:19.310Z"
     }
   ],
-  "lastUpdated": "2026-01-29T19:55:29.162Z"
+  "lastUpdated": "2026-01-29T21:37:57.450Z"
 }
