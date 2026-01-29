@@ -435,7 +435,7 @@
                   "type": "component"
                 }
               ],
-              "expanded": false
+              "expanded": true
             },
             {
               "id": "050b1032-2c3c-41dc-becb-afd846c77208",
@@ -464,7 +464,7 @@
                   "type": "component"
                 }
               ],
-              "expanded": false
+              "expanded": true
             },
             {
               "id": "6355abda-29eb-4b2e-9e87-a6a05d25ec20",
@@ -501,7 +501,7 @@
                   "type": "component"
                 }
               ],
-              "expanded": false
+              "expanded": true
             },
             {
               "id": "a97f3dfc-1edc-41c8-9fe3-d8556302d5a6",
@@ -516,7 +516,7 @@
                   "type": "component"
                 }
               ],
-              "expanded": false
+              "expanded": true
             },
             {
               "name": "INFO",
@@ -524,6 +524,21 @@
               "componentType": "instruction",
               "id": "f1c195a0-da0e-4a7d-a1a3-c1034b44ed99",
               "type": "component"
+            },
+            {
+              "id": "ec752b79-8e9e-4ca3-be9e-b96da96bf428",
+              "name": "Odeslané e-maily",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "Zákazník reaguje na cenovou nabídku",
+                  "content": "## Zákazník reaguje na tento e-mail s termíny a přílohou (cenová nabídka)\n{{vložený text zákazníka}}",
+                  "componentType": "context",
+                  "id": "336b8540-3ded-4bb8-83c4-52217fe5ba60",
+                  "type": "component"
+                }
+              ],
+              "expanded": true
             }
           ],
           "expanded": true,
@@ -588,7 +603,7 @@
                       "type": "component"
                     },
                     {
-                      "name": "Gary Halbert – e-maily a odpovědiZtělesňuješ styl Garyho Halberta, legendárního copywritera zaměřeného na přímou a lidskou komunikaci. Píšeš tak, jako bys mluvil s jedním konkrétním člověkem.  Tvé texty jsou osobní, přirozené a snadno čitelné. Používáš jednoduchý jazyk, vyhýbáš se korporátním frázím a umělému marketingovému tónu.  Zaměřuješ se na skutečné problémy, potřeby a motivace příjemce. Tvým cílem je vytvořit e-mail, na který se chce odpovědět.",
+                      "name": "Gary Halbert – e-maily a odpovědi",
                       "content": "Ztělesňuješ styl Garyho Halberta, legendárního copywritera zaměřeného na přímou a lidskou komunikaci. Píšeš tak, jako bys mluvil s jedním konkrétním člověkem.\n\nTvé texty jsou osobní, přirozené a snadno čitelné. Používáš jednoduchý jazyk, vyhýbáš se korporátním frázím a umělému marketingovému tónu.\n\nZaměřuješ se na skutečné problémy, potřeby a motivace příjemce. Tvým cílem je vytvořit e-mail, na který se chce odpovědět.",
                       "componentType": "role",
                       "id": "b356ae02-76ed-466e-ad91-a15968109536",
@@ -602,10 +617,10 @@
                       "type": "component"
                     }
                   ],
-                  "expanded": false
+                  "expanded": true
                 }
               ],
-              "expanded": true
+              "expanded": false
             }
           ],
           "expanded": true
@@ -617,57 +632,57 @@
   "prompts": [
     {
       "id": "9c534bec-4948-4fe4-916b-a2b59dab6770",
-      "name": "New Prompt",
+      "name": "Odpovědi na e-mail",
       "sections": [
         {
-          "id": "a6867157-b123-47e1-b5ab-3ba021405e74",
-          "name": "Napiš odpověď na příchozí e-mail",
-          "content": "Něco napiš",
-          "type": "context",
-          "linkedComponentId": "46fdf522-5439-4a96-b1cf-e311f0e26145",
-          "originalContent": "Něco napiš",
-          "open": false,
-          "dirty": false
-        },
-        {
-          "id": "7c07d70c-1fdd-45ec-9953-c8d62433ad09",
-          "name": "Solve Problem Set",
-          "content": "Your professor has assigned a graded problem set that constitutes a significant part of your semester final grade, and your performance on this problem set is critical for earning an A.\n\nI will present you with one problem at a time from the problem set. For each problem, please provide:\n- **Final Answer:** Present the complete final answer in the expected language format, ensuring it is clear and easily copyable.\n- **Concise Explanation:** Offer a brief, clear explanation of your reasoning that directly supports your final answer.\n\nTake your time to ensure your final answer is correct and fully addresses the question.",
-          "type": "instruction",
-          "linkedComponentId": "30222c24-337c-4d6c-a0b3-2dd957ffe27c",
-          "originalContent": "Your professor has assigned a graded problem set that constitutes a significant part of your semester final grade, and your performance on this problem set is critical for earning an A.\n\nI will present you with one problem at a time from the problem set. For each problem, please provide:\n- **Final Answer:** Present the complete final answer in the expected language format, ensuring it is clear and easily copyable.\n- **Concise Explanation:** Offer a brief, clear explanation of your reasoning that directly supports your final answer.\n\nTake your time to ensure your final answer is correct and fully addresses the question.",
-          "open": false,
-          "dirty": false
-        },
-        {
-          "id": "ad3ea1f7-9828-49e2-bba0-79441503d7d1",
-          "name": "Programming Style From Examples",
-          "content": "You have a well-established coding style that consistently appears across your projects. Your task is to analyze a selection of your previous code examples (provided as snippets following this section) to extract and document the key components of your style. This analysis should capture the following aspects:\n\n- **Comments**: Identify how comments are used, or not used, and formatted.\n- **Spacing & Formatting**: Document the conventions for indentation, line spacing, and overall code layout.\n- **Function Usage**: Examine how functions are defined, structured, and invoked.\n- **Naming Conventions**: Detail the patterns used for naming variables, functions, classes, etc.\n- **Implementation Practices**: Outline other common practices or patterns that are characteristic of your code.\n\nYour goal is to understand this style in a way that will enable you to generate new code that is indistinguishable from your own work. Use this analysis to replicate your style as accurately as possible in future code.",
-          "type": "style",
-          "linkedComponentId": "1d39dd74-a7d7-4c25-977c-861b48210611",
-          "originalContent": "You have a well-established coding style that consistently appears across your projects. Your task is to analyze a selection of your previous code examples (provided as snippets following this section) to extract and document the key components of your style. This analysis should capture the following aspects:\n\n- **Comments**: Identify how comments are used, or not used, and formatted.\n- **Spacing & Formatting**: Document the conventions for indentation, line spacing, and overall code layout.\n- **Function Usage**: Examine how functions are defined, structured, and invoked.\n- **Naming Conventions**: Detail the patterns used for naming variables, functions, classes, etc.\n- **Implementation Practices**: Outline other common practices or patterns that are characteristic of your code.\n\nYour goal is to understand this style in a way that will enable you to generate new code that is indistinguishable from your own work. Use this analysis to replicate your style as accurately as possible in future code.",
-          "open": false,
-          "dirty": false
-        },
-        {
-          "id": "bcda41f8-cc78-4f4c-b2a7-bea8f812775b",
-          "name": "College Undergrad",
-          "content": "You are a proficient college undergraduate. You are enrolled as a Computer Science student in a prestigious university, and are very smart. However, you are still quite young so you often are not able to apply the very best practices or generate the most efficient solutions. Keep this in mind as we continue with the instruction.",
+          "id": "26227b7d-2744-4a9c-8246-910e0ae99f81",
+          "name": "Gary Halbert – e-maily a odpovědi",
+          "content": "Ztělesňuješ styl Garyho Halberta, legendárního copywritera zaměřeného na přímou a lidskou komunikaci. Píšeš tak, jako bys mluvil s jedním konkrétním člověkem.\n\nTvé texty jsou osobní, přirozené a snadno čitelné. Používáš jednoduchý jazyk, vyhýbáš se korporátním frázím a umělému marketingovému tónu.\n\nZaměřuješ se na skutečné problémy, potřeby a motivace příjemce. Tvým cílem je vytvořit e-mail, na který se chce odpovědět.",
           "type": "role",
-          "linkedComponentId": "53934e3f-902a-4ca8-b0ad-ee4f7c132f3f",
-          "originalContent": "You are a proficient college undergraduate. You are enrolled as a Computer Science student in a prestigious university, and are very smart. However, you are still quite young so you often are not able to apply the very best practices or generate the most efficient solutions. Keep this in mind as we continue with the instruction.",
-          "open": false,
+          "linkedComponentId": "b356ae02-76ed-466e-ad91-a15968109536",
+          "originalContent": "Ztělesňuješ styl Garyho Halberta, legendárního copywritera zaměřeného na přímou a lidskou komunikaci. Píšeš tak, jako bys mluvil s jedním konkrétním člověkem.\n\nTvé texty jsou osobní, přirozené a snadno čitelné. Používáš jednoduchý jazyk, vyhýbáš se korporátním frázím a umělému marketingovému tónu.\n\nZaměřuješ se na skutečné problémy, potřeby a motivace příjemce. Tvým cílem je vytvořit e-mail, na který se chce odpovědět.",
+          "open": true,
           "dirty": false
         },
         {
-          "id": "2848748d-72e3-44a4-8241-789d2e341cb4",
-          "name": "Re-Write Professional Email",
-          "content": "Imagine you are a college undergrad at a prestigious university. You want to send an email to someone in a professional setting. You are working hard on your professional etiquette and want to make sure that your email is great. Your job is to re-write this email so that it perfectly communicates the idea as succinctly as possible, while carrying a friendly but professional tone.",
-          "type": "instruction",
-          "linkedComponentId": "cc5179d2-f5e2-4ab1-bb81-d794c695eceb",
-          "originalContent": "Imagine you are a college undergrad at a prestigious university. You want to send an email to someone in a professional setting. You are working hard on your professional etiquette and want to make sure that your email is great. Your job is to re-write this email so that it perfectly communicates the idea as succinctly as possible, while carrying a friendly but professional tone.",
-          "open": false,
+          "id": "98fc0539-25ba-4f7e-9ad7-7877b73edf12",
+          "name": "Zákazník reaguje na cenovou nabídku",
+          "content": "## Zákazník reaguje na tento e-mail s termíny a přílohou (cenová nabídka)\nDobrý den, pane Kabáte,\n\nv příloze Vám zasílám:\n• cenovou nabídku,\n• dispoziční řešení jednotlivých variant,\n• půdorysy jednotlivých variant řešení koupelny.\n\nProsím o jejich prostudování. V případě dotazů nebo potřeby upřesnění jsem Vám k dispozici.\nPokud budete uvažovat o realizaci, můžeme se domluvit také na osobním jednání a projít vše detailně.\n\nNavrhované termíny realizace:\n od 9. 2. 2026 do 20. 2. 2026.\n\nAlternativní termín:\nod 2. 11. 2026 do 13. 11. 2026 (orientačně).",
+          "type": "context",
+          "linkedComponentId": "336b8540-3ded-4bb8-83c4-52217fe5ba60",
+          "originalContent": "## Zákazník reaguje na tento e-mail s termíny a přílohou (cenová nabídka)\n{{vložený text zákazníka}}",
+          "open": true,
           "dirty": true
+        },
+        {
+          "id": "e52c9a96-6470-49c3-948c-30c031a3bb63",
+          "name": "Příchozí e-mail",
+          "content": "## Příchozí e-mail \n\nJaromír Kabát\npo 26. 1. 17:50 (před 3 dny)\nkomu: mně\n\nDobrý den.\nMoc děkuji za rychlou nabídku. \nTermín je velmi blízký, to by se mi na jednu stranu moc líbilo, nevím ale, jestli stihneme tak rychle vybrat vybavení a vyjednat všechny detaily.\nRozhodně bych to chtěl zkusit.\n\nděkuji\nJ.Kabát",
+          "type": "context",
+          "linkedComponentId": "16de37f1-cd3e-4615-bc62-2b9ed1c4a2a9",
+          "originalContent": "## Příchozí e-mail\n{{vložený text zákazníka}}",
+          "open": true,
+          "dirty": true
+        },
+        {
+          "id": "8757ab7b-3b7b-4037-9787-3023ba82ed0f",
+          "name": "Styl",
+          "content": "Použij klidný, profesionální a přátelský tón.\nVyhýbej se nátlaku a marketingovým frázím.",
+          "type": "style",
+          "linkedComponentId": "6735b05b-17e6-403d-aa40-ffb27e9ff46e",
+          "originalContent": "Použij klidný, profesionální a přátelský tón.\nVyhýbej se nátlaku a marketingovým frázím.",
+          "open": true,
+          "dirty": false
+        },
+        {
+          "id": "42c202a4-1590-4471-be13-ee89a443754c",
+          "name": "Format",
+          "content": "Odpověď rozděl na:\n- pozdrav\n- reakci na dotaz\n- závěr s dalším krokem",
+          "type": "format",
+          "linkedComponentId": "43be9495-57d4-4600-85c5-5f54231ae3f7",
+          "originalContent": "Odpověď rozděl na:\n- pozdrav\n- reakci na dotaz\n- závěr s dalším krokem",
+          "open": true,
+          "dirty": false
         }
       ],
       "num": 2,
@@ -675,5 +690,5 @@
       "updated_at": "2026-01-29T17:51:19.310Z"
     }
   ],
-  "lastUpdated": "2026-01-29T22:03:02.158Z"
+  "lastUpdated": "2026-01-29T22:29:43.300Z"
 }
