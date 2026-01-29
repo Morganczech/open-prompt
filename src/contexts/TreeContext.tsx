@@ -9,12 +9,12 @@ import { v4 as uuidv4 } from 'uuid';
 // import { supabase } from '../lib/supabaseClient'; // REMOVED
 // import { useAuth } from './AuthContext'; // REMOVED
 import { useAppContext } from './AppContext';
-import { parseLoadedData } from "../utils/fileUtils"; 
+import { parseLoadedData } from "../utils/fileUtils";
 
-import { 
-  insertNode, 
-  removeNode, 
-  isDescendant, 
+import {
+  insertNode,
+  removeNode,
+  isDescendant,
   moveNodeInTree,
   findNodeById as findNodeByIdUtil,
   updateNodeById,
@@ -23,7 +23,7 @@ import {
 import { debounce } from "../utils/debounce";
 
 // Initial tree data - ID should be string
-const INITIAL_TREE_DATA_ROOT_ID = uuidv4(); 
+const INITIAL_TREE_DATA_ROOT_ID = uuidv4();
 const INITIAL_TREE_DATA: FolderType[] = [
   {
     id: INITIAL_TREE_DATA_ROOT_ID,
@@ -45,7 +45,7 @@ type TreeContextType = {
   componentBeingEdited: ComponentType | null;
   setComponentBeingEdited: React.Dispatch<React.SetStateAction<ComponentType | null>>;
   handleAddFolder: (parentId: string, name: string) => void;
-  handleAddComponent: (parentId: string, componentData: Omit<ComponentType, "id" | "type">) => void; 
+  handleAddComponent: (parentId: string, componentData: Omit<ComponentType, "id" | "type">) => void;
   handleUpdateComponent: (component: ComponentType) => void;
   handleDeleteNode: (nodeId: string) => void;
   handleNodeDrop: (draggedNodeId: string, targetNodeId: string) => void;
@@ -55,21 +55,21 @@ type TreeContextType = {
 
 // Create context with default values
 const TreeContext = createContext<TreeContextType>({
-  treeData: INITIAL_TREE_DATA, 
-  setTreeData: () => {},
+  treeData: INITIAL_TREE_DATA,
+  setTreeData: () => { },
   selectedNode: null,
-  setSelectedNode: () => {},
+  setSelectedNode: () => { },
   isComponentModalOpen: false,
-  setComponentModalOpen: () => {},
+  setComponentModalOpen: () => { },
   componentBeingEdited: null,
-  setComponentBeingEdited: () => {},
-  handleAddFolder: () => {},
-  handleAddComponent: () => {},
-  handleUpdateComponent: () => {},
-  handleDeleteNode: () => {},
-  handleNodeDrop: () => {},
+  setComponentBeingEdited: () => { },
+  handleAddFolder: () => { },
+  handleAddComponent: () => { },
+  handleUpdateComponent: () => { },
+  handleDeleteNode: () => { },
+  handleNodeDrop: () => { },
   isTreeLoading: true,
-  handleToggleFolderExpand: () => {},
+  handleToggleFolderExpand: () => { },
 });
 
 export const useTreeContext = () => useContext(TreeContext);
@@ -100,7 +100,7 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
       return true;
     }
     return false;
-  }, []); 
+  }, []);
 
   const fetchAndParseStarterKit = useCallback(async (): Promise<FolderType[] | null> => {
     try {
@@ -110,37 +110,37 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
         return null;
       }
       const jsonData = await response.json();
-      const { tree } = parseLoadedData(jsonData); 
-      return tree as FolderType[]; 
+      const { tree } = parseLoadedData(jsonData);
+      return tree as FolderType[];
     } catch (error) {
       console.error("Error fetching or parsing starter-kit.json:", error);
       return null;
     }
-  }, []); 
+  }, []);
   // Function to transform flat list from API to tree structure
   // This assumes the API returns a flat list with parent_id references.
   // If the API returns a nested structure, this will need to be adjusted.
   const buildTreeFromApiData = useCallback((apiItems: (Omit<ComponentType, 'type'> & { item_type: 'component', parent_id: string | null, component_type: ComponentType['componentType'] } | Omit<FolderType, 'type' | 'children' | 'expanded'> & { item_type: 'folder', parent_id: string | null, is_expanded?: boolean })[]): FolderType[] => {
     // First, check if we have a root "Components" folder in the API data
-    const rootFolderFromApi = apiItems.find(item => 
-      item.item_type === 'folder' && 
-      item.name === "Components" && 
+    const rootFolderFromApi = apiItems.find(item =>
+      item.item_type === 'folder' &&
+      item.name === "Components" &&
       item.parent_id === null
     );
 
     // Create a map for quick lookup of items by ID
     const itemMap: { [id: string]: TreeNode & { children?: TreeNode[], parent_id?: string | null, is_expanded?: boolean } } = {};
-    
+
     // Define the final root folder that we'll return
     // Use the ID from API if it exists, otherwise use our constant ID
     const rootFolder: FolderType = {
-        id: rootFolderFromApi ? rootFolderFromApi.id : INITIAL_TREE_DATA_ROOT_ID,
-        name: "Components",
-        type: "folder",
-        children: [],
-        expanded: rootFolderFromApi ? 
-          (rootFolderFromApi as any).is_expanded !== undefined ? (rootFolderFromApi as any).is_expanded === 1 : true 
-          : true,
+      id: rootFolderFromApi ? rootFolderFromApi.id : INITIAL_TREE_DATA_ROOT_ID,
+      name: "Components",
+      type: "folder",
+      children: [],
+      expanded: rootFolderFromApi ?
+        (rootFolderFromApi as any).is_expanded !== undefined ? (rootFolderFromApi as any).is_expanded === 1 : true
+        : true,
     };
 
     // Add the root folder to our map
@@ -148,50 +148,50 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
 
     // Process all items from the API
     apiItems.forEach(item => {
-        // Skip the root folder as we already processed it
-        if (item.id === rootFolder.id) {
-            return;
-        }
+      // Skip the root folder as we already processed it
+      if (item.id === rootFolder.id) {
+        return;
+      }
 
-        let treeNode:
+      let treeNode:
         | (ComponentType & { parent_id?: string | null })
         | (FolderType & { parent_id?: string | null });
 
-        if (item.item_type === 'folder') {
-            treeNode = {
-                id: item.id,
-                name: item.name,
-                type: "folder",
-                children: [],
-                expanded: item.is_expanded !== undefined ? item.is_expanded === true : false,
-                parent_id: item.parent_id,
-            };
-        } else { // component
-            treeNode = {
-                id: item.id,
-                name: item.name,
-                type: "component",
-                content: (item as any).content, // Cast needed due to Omit
-                componentType: item.component_type,
-                parent_id: item.parent_id,
-            };
-        }
-        itemMap[treeNode.id] = treeNode;
+      if (item.item_type === 'folder') {
+        treeNode = {
+          id: item.id,
+          name: item.name,
+          type: "folder",
+          children: [],
+          expanded: item.is_expanded !== undefined ? item.is_expanded === true : false,
+          parent_id: item.parent_id,
+        };
+      } else { // component
+        treeNode = {
+          id: item.id,
+          name: item.name,
+          type: "component",
+          content: (item as any).content, // Cast needed due to Omit
+          componentType: item.component_type,
+          parent_id: item.parent_id,
+        };
+      }
+      itemMap[treeNode.id] = treeNode;
     });    // Build the tree structure by connecting children to their parents
     Object.values(itemMap).forEach(item => {
-        if (item.id === rootFolder.id) return; // Skip the root folder
+      if (item.id === rootFolder.id) return; // Skip the root folder
 
-        if (item.parent_id && itemMap[item.parent_id]) {
-            const parentFolder = itemMap[item.parent_id] as FolderType;
-            if (parentFolder.type === 'folder') {
-                parentFolder.children.push(item as TreeNode);
-            }
-        } else if (item.parent_id === null || !itemMap[item.parent_id!]) {
-            // Items without a parent_id or with an invalid parent_id become direct children of the root folder
-            rootFolder.children.push(item as TreeNode);
+      if (item.parent_id && itemMap[item.parent_id]) {
+        const parentFolder = itemMap[item.parent_id] as FolderType;
+        if (parentFolder.type === 'folder') {
+          parentFolder.children.push(item as TreeNode);
         }
+      } else if (item.parent_id === null || !itemMap[item.parent_id!]) {
+        // Items without a parent_id or with an invalid parent_id become direct children of the root folder
+        rootFolder.children.push(item as TreeNode);
+      }
     });
-    
+
     // Return the single root folder as our tree
     return [rootFolder];
   }, [INITIAL_TREE_DATA_ROOT_ID]);
@@ -234,7 +234,7 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
   useEffect(() => {
     const loadInitialTreeData = async () => {
       if (!appInitialized) {
-        setIsTreeLoading(false); 
+        setIsTreeLoading(false);
         return;
       }
       setIsTreeLoading(true);
@@ -243,7 +243,7 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
         const response = await fetch('/api/components');
         if (response.ok) {
           const apiItemsFlat = await response.json(); // Expecting flat list from API
-          
+
           if (apiItemsFlat && Array.isArray(apiItemsFlat) && apiItemsFlat.length > 0) {
             const structuredTree = buildTreeFromApiData(apiItemsFlat);
             const normalizedTree = normalizeExpansionState(structuredTree, true) as FolderType[]; // Root is expanded
@@ -255,9 +255,9 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
               // Starter kit is already FolderType[] and should have expansion state
               const normalizedStarterKit = normalizeExpansionState(starterKitTree, true) as FolderType[];
               setTreeData(normalizedStarterKit);
-              saveTreeToApi(normalizedStarterKit); 
+              saveTreeToApi(normalizedStarterKit);
             } else {
-              setTreeData(INITIAL_TREE_DATA); 
+              setTreeData(INITIAL_TREE_DATA);
             }
           }
         } else {
@@ -273,16 +273,16 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
       } catch (e) {
         console.error("[TreeContext|useEffect] General error during initial tree load:", e);
         try {
-            const starterKitTree = await fetchAndParseStarterKit();
-            if (starterKitTree) {
-                const normalizedStarterKit = normalizeExpansionState(starterKitTree, true) as FolderType[];
-                setTreeData(normalizedStarterKit);
-            } else {
-                setTreeData(INITIAL_TREE_DATA);
-            }
-        } catch (starterKitError) {
-            console.error("Error loading starter kit as fallback:", starterKitError);
+          const starterKitTree = await fetchAndParseStarterKit();
+          if (starterKitTree) {
+            const normalizedStarterKit = normalizeExpansionState(starterKitTree, true) as FolderType[];
+            setTreeData(normalizedStarterKit);
+          } else {
             setTreeData(INITIAL_TREE_DATA);
+          }
+        } catch (starterKitError) {
+          console.error("Error loading starter kit as fallback:", starterKitError);
+          setTreeData(INITIAL_TREE_DATA);
         }
       } finally {
         setIsTreeLoading(false);
@@ -290,20 +290,20 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
     };
 
     loadInitialTreeData();
-  }, [appInitialized, fetchAndParseStarterKit, saveTreeToApi, normalizeExpansionState, buildTreeFromApiData, INITIAL_TREE_DATA_ROOT_ID]); 
+  }, [appInitialized, fetchAndParseStarterKit, saveTreeToApi, normalizeExpansionState, buildTreeFromApiData, INITIAL_TREE_DATA_ROOT_ID]);
 
   // Effect to save tree data to API when it changes
   useEffect(() => {
     // Only save if not loading, app is initialized, and treeData is not the initial empty state.
     // The check for INITIAL_TREE_DATA might be too simplistic if user intentionally clears to this state.
     // However, saveTreeToApi will be called after load if starter kit is used.
-    if (!isTreeLoading && appInitialized && treeData !== INITIAL_TREE_DATA) { 
+    if (!isTreeLoading && appInitialized && treeData !== INITIAL_TREE_DATA) {
       // Check if treeData is not the default initial one to avoid saving it on first load if API was empty
       // This condition needs to be robust. Comparing arrays/objects directly is tricky.
       // A better check might be if the treeData reference is different from the initial constant
       // or if it has more than the initial root folder with no children.
       if (!isEffectivelyInitialOrEmpty(treeData)) {
-          saveTreeToApi(treeData);
+        saveTreeToApi(treeData);
       }
     }
   }, [treeData, appInitialized, isTreeLoading, saveTreeToApi, isEffectivelyInitialOrEmpty]);
@@ -315,7 +315,7 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
       name,
       type: "folder",
       children: [],
-      expanded: false, 
+      expanded: false,
     };
     // Optimistic update
     const newTreeData = insertNode(treeDataRef.current, parentId, newFolder);
@@ -339,15 +339,15 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
   const handleUpdateComponent = (componentToUpdate: ComponentType) => {
     // Optimistic update
     const updateInTree = (nodes: TreeNode[]): TreeNode[] => {
-        return nodes.map(node => {
-            if (node.id === componentToUpdate.id && node.type === "component") {
-                return componentToUpdate; 
-            }
-            if (node.type === "folder") {
-                return { ...node, children: updateInTree(node.children) };
-            }
-            return node;
-        });
+      return nodes.map(node => {
+        if (node.id === componentToUpdate.id && node.type === "component") {
+          return componentToUpdate;
+        }
+        if (node.type === "folder") {
+          return { ...node, children: updateInTree(node.children) };
+        }
+        return node;
+      });
     };
     setTreeData(prevTree => updateInTree(prevTree) as FolderType[]);
     // saveTreeToApi will be called by the useEffect watching treeData
@@ -367,20 +367,20 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
   const handleNodeDrop = (draggedNodeId: string, targetNodeId: string) => {
     const currentTree = treeDataRef.current;
     const draggedNode = findNodeByIdUtil(currentTree, draggedNodeId);
-    const targetNode = findNodeByIdUtil(currentTree, targetNodeId); 
-    
+    const targetNode = findNodeByIdUtil(currentTree, targetNodeId);
+
     if (!draggedNode || !targetNode) return;
-    
-    let actualTargetFolderId = targetNodeId;
+
+    const actualTargetFolderId = targetNodeId;
     if (targetNode.type !== "folder") {
-        // This logic needs to find the parent of targetNode if it's a component.
-        // For now, we assume targetNodeId is a folder or we need a findParent function.
-        // Let's simplify: if target is not a folder, disallow or find parent.
-        // This is complex. Let's assume targetNodeId is always a valid folder drop target for now.
-        console.warn("Complex drop target, assuming targetNodeId is a folder.");
-        // A better approach: moveNodeInTree should take the target *parent* ID.
-        // If targetNode is a component, the drop should be on its parent.
-        // This requires findParent(targetNodeId) or similar.
+      // This logic needs to find the parent of targetNode if it's a component.
+      // For now, we assume targetNodeId is a folder or we need a findParent function.
+      // Let's simplify: if target is not a folder, disallow or find parent.
+      // This is complex. Let's assume targetNodeId is always a valid folder drop target for now.
+      console.warn("Complex drop target, assuming targetNodeId is a folder.");
+      // A better approach: moveNodeInTree should take the target *parent* ID.
+      // If targetNode is a component, the drop should be on its parent.
+      // This requires findParent(targetNodeId) or similar.
     }
 
     if (draggedNode.type === "folder" && isDescendant(targetNode as FolderType, draggedNode as FolderType)) {
@@ -398,31 +398,31 @@ export const TreeProvider = ({ children }: TreeProviderProps) => {
     const currentTree = treeDataRef.current;
     const nodeToUpdate = findNodeByIdUtil(currentTree, folderId);
     if (nodeToUpdate && nodeToUpdate.type === 'folder') {
-        const currentFolder = nodeToUpdate as FolderType;
-        const updates: Partial<FolderType> = { expanded: !currentFolder.expanded };
-        const newTreeData = updateNodeById(currentTree, folderId, updates);
-        setTreeData(newTreeData); 
-        // saveTreeToApi will be called by the useEffect watching treeData
+      const currentFolder = nodeToUpdate as FolderType;
+      const updates: Partial<FolderType> = { expanded: !currentFolder.expanded };
+      const newTreeData = updateNodeById(currentTree, folderId, updates);
+      setTreeData(newTreeData);
+      // saveTreeToApi will be called by the useEffect watching treeData
     }
   };
 
   return (
     <TreeContext.Provider value={{
-      treeData, 
-      setTreeData, 
-      selectedNode, 
-      setSelectedNode, 
-      isComponentModalOpen, 
-      setComponentModalOpen, 
-      componentBeingEdited, 
-      setComponentBeingEdited, 
-      handleAddFolder, 
-      handleAddComponent, 
-      handleUpdateComponent, 
-      handleDeleteNode, 
+      treeData,
+      setTreeData,
+      selectedNode,
+      setSelectedNode,
+      isComponentModalOpen,
+      setComponentModalOpen,
+      componentBeingEdited,
+      setComponentBeingEdited,
+      handleAddFolder,
+      handleAddComponent,
+      handleUpdateComponent,
+      handleDeleteNode,
       handleNodeDrop,
       isTreeLoading,
-      handleToggleFolderExpand, 
+      handleToggleFolderExpand,
     }}>
       {children}
     </TreeContext.Provider>

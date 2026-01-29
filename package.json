@@ -1,5 +1,5 @@
 {
-  "name": "prompt-builder",
+  "name": "open-prompt",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,19 +11,14 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.3",
-    "@mui/material": "^6.4.2",
-    "@supabase/auth-ui-react": "^0.4.7",
-    "@supabase/auth-ui-shared": "^0.1.8",
-    "@supabase/supabase-js": "^2.43.4",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.7",
+    "@mui/material": "^7.3.7",
+    "@octokit/rest": "^22.0.1",
     "better-sqlite3": "^11.10.0",
     "next": "^15.2.4",
-    "posthog-js": "^1.234.1",
-    "posthog-node": "^4.11.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tunnel-ssh": "^5.2.0",
     "typed.js": "^2.1.0",
     "uuid": "^11.1.0"
   },
@@ -38,7 +33,6 @@
     "dotenv": "^16.4.7",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
-    "mysql2": "^3.14.0",
     "sass": "^1.83.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"

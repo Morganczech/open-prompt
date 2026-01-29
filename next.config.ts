@@ -12,9 +12,7 @@ const nextConfig: NextConfig = {
         @use "global/base"; // Corrected path
         `
     },
-    // This is required to support PostHog trailing slash API requests
-    skipTrailingSlashRedirect: true,
-    trailingSlash: true, // Add this line
+    trailingSlash: true,
 };
 
 export default nextConfig;

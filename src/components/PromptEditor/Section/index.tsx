@@ -25,46 +25,46 @@ const findComponentById = (treeData: any[], id: string): ComponentType | null =>
     if (node.id === id && node.type === "component") {
       return node as ComponentType;
     }
-    
+
     if (node.type === "folder" && node.children) {
       const found = findComponentById(node.children, id);
       if (found) return found;
     }
   }
-  
+
   return null;
 };
 
 const Section: React.FC<SectionProps> = ({ section, promptId, nameInputRefCallback, index }) => {
-  const { 
-    updateSection, 
-    deleteSection, 
+  const {
+    updateSection,
+    deleteSection,
     toggleSectionOpen,
     updateSectionFromLinkedComponent,
   } = usePromptContext();
-  
+
   const { treeData } = useTreeContext();
-  const { saveSectionToComponentLibrary } = usePrompts(); 
-  
+  const { saveSectionToComponentLibrary } = usePrompts();
+
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   useAutosizeTextArea(textAreaRef, section.content, section.open);
-  
+
   useEffect(() => {
     if (section.linkedComponentId) {
       const linkedComponent = findComponentById(treeData, section.linkedComponentId);
-      
-      if (linkedComponent && 
-          (linkedComponent.content !== section.originalContent ||
-           linkedComponent.componentType !== section.type ||
-           linkedComponent.name !== section.name)) {
-        updateSectionFromLinkedComponent(section, linkedComponent);
+
+      if (linkedComponent &&
+        (linkedComponent.content !== section.originalContent ||
+          linkedComponent.componentType !== section.type ||
+          linkedComponent.name !== section.name)) {
+        updateSectionFromLinkedComponent(promptId, section.id, linkedComponent);
       }
     }
   }, [treeData, section, updateSectionFromLinkedComponent]);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    updateSection(promptId, section.id, { 
+    updateSection(promptId, section.id, {
       content: e.target.value
     });
   };
@@ -73,19 +73,19 @@ const Section: React.FC<SectionProps> = ({ section, promptId, nameInputRefCallba
     e.preventDefault();
     setIsDraggingOver(true);
   };
-  
+
   const handleDragLeave = () => {
     setIsDraggingOver(false);
   };
-  
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDraggingOver(false);
-    
+
     try {
       const data = e.dataTransfer.getData("text/plain");
       const component = JSON.parse(data);
-      
+
       if (component && component.type === "component") {
         updateSection(promptId, section.id, {
           content: component.content,
@@ -101,7 +101,7 @@ const Section: React.FC<SectionProps> = ({ section, promptId, nameInputRefCallba
   };
 
   const handleSectionDragStart = (e: React.DragEvent) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     const dragData = {
       dragType: "existingSection",
       sectionId: section.id,
@@ -120,10 +120,10 @@ const Section: React.FC<SectionProps> = ({ section, promptId, nameInputRefCallba
   };
 
   return (
-    <div 
+    <div
       className={`section ${section.open ? "open" : "closed"} ${isDraggingOver ? "drag-over" : ""} ${section.type}`}
     >
-      <div 
+      <div
         className="section-drag-handle"
         draggable={true}
         onDragStart={handleSectionDragStart}
@@ -131,16 +131,16 @@ const Section: React.FC<SectionProps> = ({ section, promptId, nameInputRefCallba
         title="Drag to reorder section"
       ></div>
 
-      <SectionHeader 
+      <SectionHeader
         section={section}
         promptId={promptId}
         onToggle={() => toggleSectionOpen(promptId, section.id)}
         onDelete={() => deleteSection(promptId, section.id)}
         nameInputRefCallback={nameInputRefCallback}
       />
-      
+
       {section.open && (
-        <div 
+        <div
           className="section-content"
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
@@ -153,12 +153,12 @@ const Section: React.FC<SectionProps> = ({ section, promptId, nameInputRefCallba
             onChange={handleContentChange}
             placeholder="Section content..."
           />
-          
+
           {section.linkedComponentId && (
             <div className="linked-component-indicator">
               <span>Linked to component</span>
               {section.dirty && (
-                <button 
+                <button
                   className="save-to-library-btn"
                   onClick={() => saveSectionToComponentLibrary(promptId, section.id)}
                 >

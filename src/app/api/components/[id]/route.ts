@@ -8,9 +8,9 @@ import { db } from '@/lib/db'; // SQLite database instance
 import { FolderType, ComponentType } from '@/types';
 
 interface RouteParams {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
 /**
@@ -19,7 +19,7 @@ interface RouteParams {
  */
 export async function GET(request: Request, { params }: RouteParams) {
     try {
-        const { id } = params;
+        const { id } = await params;
         const stmt = db.prepare('SELECT id, parent_id, name, item_type, content, component_type, is_expanded, created_at, updated_at FROM component_library WHERE id = ?');
         const itemRaw = stmt.get(id) as any;
 
@@ -38,7 +38,7 @@ export async function GET(request: Request, { params }: RouteParams) {
             return NextResponse.json({ error: 'Item not found' }, { status: 404 });
         }
     } catch (error) {
-        console.error(`Error fetching item ${params.id}:`, error);
+        console.error(`Error fetching item:`, error);
         return NextResponse.json({ error: 'Failed to fetch item' }, { status: 500 });
     }
 }
@@ -49,7 +49,7 @@ export async function GET(request: Request, { params }: RouteParams) {
  */
 export async function PUT(request: Request, { params }: RouteParams) {
     try {
-        const { id } = params;
+        const { id } = await params;
         const body = await request.json();
         // Add is_expanded to destructuring, and ensure expanded from FolderType is mapped to is_expanded
         const { name, parent_id, item_type, content, component_type, expanded } = body as Partial<FolderType & ComponentType & { expanded: boolean }>;
@@ -70,10 +70,10 @@ export async function PUT(request: Request, { params }: RouteParams) {
                 is_expanded_db = expanded ? 1 : 0;
             }
             if (body.hasOwnProperty('content') && content !== null) {
-                 return NextResponse.json({ error: 'Content must be null for folders' }, { status: 400 });
+                return NextResponse.json({ error: 'Content must be null for folders' }, { status: 400 });
             }
             if (body.hasOwnProperty('component_type') && component_type !== null) {
-                 return NextResponse.json({ error: 'Component type must be null for folders' }, { status: 400 });
+                return NextResponse.json({ error: 'Component type must be null for folders' }, { status: 400 });
             }
         } else if (effectiveItemType === 'component') {
             // Content and component_type checks remain the same
@@ -88,7 +88,7 @@ export async function PUT(request: Request, { params }: RouteParams) {
                 // Or simply ignore it, but for clarity, ensure DB stores null
             }
         }
-        
+
         const currentTimestamp = new Date().toISOString();
 
         // Build the update query dynamically based on provided fields
@@ -157,7 +157,7 @@ export async function PUT(request: Request, { params }: RouteParams) {
         }
 
     } catch (error) {
-        console.error(`Error updating item ${params.id}:`, error);
+        console.error(`Error updating item:`, error);
         if (error instanceof SyntaxError) {
             return NextResponse.json({ error: 'Invalid JSON format in request body' }, { status: 400 });
         }
@@ -171,7 +171,7 @@ export async function PUT(request: Request, { params }: RouteParams) {
  */
 export async function DELETE(request: Request, { params }: RouteParams) {
     try {
-        const { id } = params;
+        const { id } = await params;
 
         // Check if the item exists
         const checkStmt = db.prepare('SELECT id FROM component_library WHERE id = ?');
@@ -189,7 +189,7 @@ export async function DELETE(request: Request, { params }: RouteParams) {
             return NextResponse.json({ error: 'Item not found or already deleted' }, { status: 404 });
         }
     } catch (error) {
-        console.error(`Error deleting item ${params.id}:`, error);
+        console.error(`Error deleting item:`, error);
         return NextResponse.json({ error: 'Failed to delete item' }, { status: 500 });
     }
 }

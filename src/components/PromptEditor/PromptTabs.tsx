@@ -36,15 +36,15 @@ const PromptTabs: React.FC<PromptTabsProps> = ({
   const { addPrompt, deletePrompt, duplicatePrompt } = usePromptContext(); // Add duplicatePrompt
 
   // Handle adding a new prompt
-  const handleAddPrompt = () => {
-    const newPrompt = addPrompt();
+  const handleAddPrompt = async () => {
+    const newPrompt = await addPrompt();
     setActivePromptId(newPrompt.id); // newPrompt.id is string
   };
 
   // Handle deleting a prompt
   const handleDeletePrompt = (promptId: string, e: React.MouseEvent) => { // Changed promptId to string
     e.stopPropagation();
-    
+
     if (prompts.length <= 1) {
       alert("Cannot delete the only prompt. Create another prompt first.");
       return;
@@ -57,7 +57,7 @@ const PromptTabs: React.FC<PromptTabsProps> = ({
     if (activePromptId === null) {
       // This case should ideally be prevented by disabling the button if no prompt is active,
       // but as a fallback, an alert can be shown or it can simply do nothing.
-      alert("No active prompt to duplicate."); 
+      alert("No active prompt to duplicate.");
       return;
     }
     // The duplicatePrompt function in the context now handles setting the new prompt as active.
@@ -119,16 +119,16 @@ const PromptTabs: React.FC<PromptTabsProps> = ({
           </div>
         );
       })}
-      
+
       <div className="prompt-tab-actions">
-        <div 
-          className="add-prompt-tab" 
-          onClick={handleAddPrompt} 
+        <div
+          className="add-prompt-tab"
+          onClick={handleAddPrompt}
           title="Add New Prompt" // Added title
         >
           <AddIcon />
         </div>
-        <div 
+        <div
           className="duplicate-prompt-tab" // New class for styling
           onClick={handleDuplicatePrompt}
           title="Duplicate Current Prompt" // Added title

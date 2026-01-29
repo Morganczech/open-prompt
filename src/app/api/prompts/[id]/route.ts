@@ -8,9 +8,9 @@ import { db } from '@/lib/db'; // SQLite database instance
 import { Prompt } from '@/types'; // Assuming Prompt type is defined
 
 interface RouteParams {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
 /**
@@ -33,7 +33,7 @@ export async function GET(request: Request, { params }: RouteParams) {
             return NextResponse.json({ error: 'Prompt not found' }, { status: 404 });
         }
     } catch (error) {
-        console.error(`Error fetching prompt ${params.id}:`, error);
+        console.error(`Error fetching prompt:`, error);
         return NextResponse.json({ error: 'Failed to fetch prompt' }, { status: 500 });
     }
 }
@@ -62,7 +62,7 @@ export async function PUT(request: Request, { params }: RouteParams) {
         }
 
         const currentTimestamp = new Date().toISOString();
-        
+
         // Fetch current prompt data to merge if only partial data is sent
         const currentPromptStmt = db.prepare('SELECT name, sections, num FROM prompts WHERE id = ?');
         const currentPromptData = currentPromptStmt.get(id) as { name: string; sections: string; num: number | null };
@@ -79,18 +79,18 @@ export async function PUT(request: Request, { params }: RouteParams) {
         // Retrieve the updated prompt to return it
         const updatedPromptStmt = db.prepare('SELECT id, name, sections, num, created_at, updated_at FROM prompts WHERE id = ?');
         const updatedPromptRaw = updatedPromptStmt.get(id) as any;
-        
+
         if (!updatedPromptRaw) {
             // Should not happen if update was successful and ID is correct
             console.error(`Failed to retrieve updated prompt ${id} after update.`);
             return NextResponse.json({ error: 'Failed to retrieve prompt after update' }, { status: 500 });
         }
-        
+
         return NextResponse.json({ ...updatedPromptRaw, sections: JSON.parse(updatedPromptRaw.sections) });
 
     } catch (error) {
         // Access params.id safely for logging, it should be available if the signature is correct
-        console.error(`Error updating prompt ${params?.id || 'unknown'}:`, error);
+        console.error(`Error updating prompt:`, error);
         if (error instanceof SyntaxError) {
             return NextResponse.json({ error: 'Invalid JSON format in request body' }, { status: 400 });
         }
@@ -133,7 +133,7 @@ export async function DELETE(request: Request, { params }: RouteParams) {
             return NextResponse.json({ error: 'Prompt not found or already deleted' }, { status: 404 });
         }
     } catch (error) {
-        console.error(`Error deleting prompt ${params.id}:`, error);
+        console.error(`Error deleting prompt:`, error);
         return NextResponse.json({ error: 'Failed to delete prompt' }, { status: 500 });
     }
 }
